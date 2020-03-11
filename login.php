@@ -9,30 +9,35 @@
 	include "sqldb.php";
 	$enterUser = $_POST['username'];
 	$enterPass = $_POST['password'];
-	$secPass = md5(($enterPass));
+	#$secPass = md5(($enterPass));
 	//echo $mdPass;
-	$sql = "SELECT * FROM accounts WHERE username='$enterUser'";	
+	$sql = "SELECT * FROM accounts WHERE username='$enterUser'";
 	//$sql = "SELCT * FROM 'account' WHERE 1";
 	$result = $conn->query($sql);
 	echo $result->num_rows;
-	echo "Running SQL statement - <br>" . $sql . "<br>";
-	echo "test <br>";
-    	
+	#echo "Running SQL statement - <br>" . $sql . "<br>";
+	#echo "test <br>";
+
+
 	$row = $result->fetch_assoc();
-	if ( $secPass === $row["password"]){
+	$hash = $row["password"];
+	$auth = password_verify($enterPass, $hash);
+
+	if ( $auth == TRUE ){
 	    #echo "pass" . $row["username"] . "<br>";
 	    $_SESSION['login'] = $row["username"];
-	    header("Location: journal.php");
+	    header("Location: calendar.php");
 	    //echo "Session login value = " . $_SESSION . "<br>";
 	    //echo "Password match";
 	} else {
-	    echo "Error: " . $sql . "<br>" . $conn->error;
+	    echo "invalid username or password. Please try again";
 	    #header("Location: login.html");
 	    $_SESSION['login']='';
-	    $ref = getenv("HTTP_REFERER");
+	    header("Location: login2.html");
 	    //$goto = "Location: " . $ref;
 	}
 	$conn->close();
 ?>
 </body>
 </html>
+
