@@ -16,11 +16,15 @@ html, body{
 #login-container h2{
     text-align: center;
     font-size: 2vw;
+    padding-bottom: 2vh;
 }
 .form-group{
     margin-right:0;
     margin-left: 0;
 }
-.form-group button{
-    background-image: linear-gradient(to right, red , yellow);
+#login-container button{
+    background-color: #5CDB95;
+}
+#login-container button:hover{
+    background-color: #379683;
 }
