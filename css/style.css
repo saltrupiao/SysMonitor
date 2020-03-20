@@ -1,0 +1,26 @@
+html, body{
+    background-image: linear-gradient(to right, #5CDB95 , #EDF5E1);
+    color:#FEFEFE;
+}
+.login-portal{
+    background-color: #05386B;
+    width: 30vw;
+    height: 35vh;
+    margin: 20vh 35vw 30vh 35vw;
+    border: black;
+}
+#login-container{
+    width: 25vw;
+    margin: 2.5vw;
+}
+#login-container h2{
+    text-align: center;
+    font-size: 2vw;
+}
+.form-group{
+    margin-right:0;
+    margin-left: 0;
+}
+.form-group button{
+    background-image: linear-gradient(to right, red , yellow);
+}
