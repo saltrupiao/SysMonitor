@@ -1,7 +1,6 @@
 #!/bin/env python
 #Following examples from 
 #https://www.programcreek.com/python/example/53878/psutil.disk_usage
-#https://www.programcreek.com/python/example/53877/psutil.users
 
 import psutil
 import os
@@ -28,12 +27,14 @@ net = psutil.net_if_addrs()
 
 for nic in net.keys():
     print(nic)
+    count = 0
     for interface in net[nic]: 
-        print("     " + str(interface[1]))
-        #for tup in interface:
-        #    print(tup)
+        if count == 0:
+            print("     IPv4 address: " + str(interface[1]))
+        elif count == 1:
+            print("     IPv6 address: " + str(interface[1]))
+        elif count == 2:
+            print("     MAC address: " + str(interface[1]))
+        count = count + 1
 i = 0
-
-users = psutil.users()
-for user in users:
-    print(user.name)
+count = 0
