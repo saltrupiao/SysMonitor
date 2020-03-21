@@ -18,7 +18,6 @@
 	#echo "Running SQL statement - <br>" . $sql . "<br>";
 	#echo "test <br>";
 
-
 	$row = $result->fetch_assoc();
 	$hash = $row["password"];
 	$auth = password_verify($enterPass, $hash);
