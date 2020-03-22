@@ -32,6 +32,6 @@ chmod 600 ./privateKey.pem
 # create cron file for user
 touch /var/spool/cron/user/usr/bin/crontab /var/spool/cron/user
 # create cron job
-echo "0 0 * * * ./networkinfo.sh" >> /var/spool/cron/<user>
+echo "0 0 * * * ./networkinfo.sh" >> /var/spool/cron/user
 # validate cron job for user
 crontab -u user -l
