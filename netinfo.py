@@ -34,7 +34,7 @@ for nic in net.keys():
         elif count == 1:
             print("     IPv6 address: " + str(interface[1]))
         elif count == 2:
-            print("     MAC address: " + str(interface[1]))
+            print("     MAC address:  " + str(interface[1]))
         count = count + 1
 i = 0
 count = 0
