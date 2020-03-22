@@ -9,6 +9,7 @@
 # =================================================================
 
 user = $1;
+installdir = $PWD
 
 # install python
 yum -y install python3
@@ -21,10 +22,12 @@ yes | pip3 install psutil
 yum -y install rsync
 
 # create folder to store logs
-mkdir ./sysInfo
+mkdir $PWD/sysInfo
 
 # set privlages on private key
-chmod 600 ./privateKey.pem
+mkdir -p ~/.ssh/sysmonitor
+cp id_rsa ~/.ssh/sysmonitor/
+chmod 600 ~/.ssh/sysmonitor/id_rsa
 
 # create cron job to execute bash script
 # append user to allow list
