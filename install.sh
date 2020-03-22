@@ -22,7 +22,7 @@ yes | pip3 install psutil
 yum -y install rsync
 
 # create folder to store logs
-mkdir $PWD/sysInfo
+mkdir $installdir/sysInfo
 
 # set privlages on private key
 mkdir -p ~/.ssh/sysmonitor
