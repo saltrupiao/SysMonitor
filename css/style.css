@@ -5,9 +5,12 @@ html, body{
 .login-portal{
     background-color: #05386B;
     width: 30vw;
-    height: 35vh;
+    height: 40vh;
     margin: 20vh 35vw 30vh 35vw;
-    border: black;
+    border: #fefefe;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 2px;
 }
 #login-container{
     width: 25vw;
@@ -24,6 +27,7 @@ html, body{
 }
 #login-container button{
     background-color: #5CDB95;
+    color
 }
 #login-container button:hover{
     background-color: #379683;
