@@ -2,7 +2,7 @@
 
 # =================================================================
 # Description: (***Execute script as sudo***)
-#		1.) Installs python2, python3, psutil, rsync.
+#		1.) Installs python3, psutil, rsync.
 # 		2.) Creates sysInfo folder in current working directory 
 #		3.) Sets privlages on privateKey.pem
 #		4.) Creates cron job to execute networkinfo.sh file 
@@ -11,7 +11,6 @@
 user = $1;
 
 # install python
-yum -y install python2
 yum -y install python3
 
 # install psutil
