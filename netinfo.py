@@ -20,7 +20,7 @@ i = 0
 print("\nNetwork info\n------------")
 netInterfaces = os.listdir('/sys/class/net')
 for interface in netInterfaces:
-    print("Interface: " + netInterfaces[i])
+    #print("Interface: " + netInterfaces[i])
     i = i + 1
 i = 0
 net = psutil.net_if_addrs()
