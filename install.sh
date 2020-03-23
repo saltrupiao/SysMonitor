@@ -9,7 +9,7 @@
 # =================================================================
 
 user = $1;
-installdir = $PWD
+installdir = $2
 
 # install python
 yum -y install python3
@@ -31,10 +31,10 @@ chmod 600 ~/.ssh/sysmonitor/id_rsa
 
 # create cron job to execute bash script
 # append user to allow list
-"<user>" >> /etc/cron.allow
+$user >> /etc/cron.allow
 # create cron file for user
-touch /var/spool/cron/user/usr/bin/crontab /var/spool/cron/user
+touch /var/spool/cron/$user/usr/bin/crontab /var/spool/cron/$user
 # create cron job
-echo "0 0 * * * ./networkinfo.sh" >> /var/spool/cron/user
+echo "0 0 * * * ./networkinfo.sh" >> /var/spool/cron/$user
 # validate cron job for user
-crontab -u user -l
+crontab -u $user -l
