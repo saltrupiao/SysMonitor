@@ -40,12 +40,12 @@
 @media (max-width: 767px) {
 
 	.navbar-dark .navbar-toggler { 
-            //border-color: #444;
+            /*border-color: #444;*/
             border: solid 0px;
         }
         
 	.navbar-dark .navbar-toggler:focus { 
-            //background: #333;
+            /*background: #333;*/
             outline: 0; 
         }
         
