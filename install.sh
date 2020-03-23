@@ -8,6 +8,7 @@
 #		4.) Creates cron job to execute networkinfo.sh file 
 # =================================================================
 
+# command line args
 user = $1;
 installdir = $2
 
