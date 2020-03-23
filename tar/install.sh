@@ -9,7 +9,7 @@
 # =================================================================
 
 # command line args
-user = $1;
+user = $1
 installdir = $2
 
 # install python
