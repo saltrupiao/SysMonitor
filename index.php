@@ -5,13 +5,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="System Monitor">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    
+
     <title>System Monitor</title>
 
     <!-- CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="assets/css/media-queries.css">
 
 </head>
 
@@ -21,7 +23,7 @@
         <div class="row h-100">
             <div class="col-12 my-auto">
                 <div class="d-flex justify-content-center align-items-center">
-                    <div class="card">
+                    <div class="card wow fadeIn">
                         <form action="view/dashboard.php" class="was-validated" method="post" id="login-container">
                             <div class="card-header text-center">
                                 <img src="assets/img/backgrounds/dashboard.svg" alt="usrImg" style="width: 30%; height: 30%;">
@@ -49,12 +51,13 @@
                         </form>
                     </div>
                 </div>
-                <p id="copyright">&copy; <a href="https://github.com/saltrupiao/SysMonitor">Tux Rules</a> Project Group</p>
+                <p id="copyright" class="wow fadeIn">&copy; <a href="https://github.com/saltrupiao/SysMonitor">Tux Rules</a> Project Group</p>
             </div>
         </div>
     </div>
 
-    <!-- Javascript -->
+
+	<!-- Javascript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -63,7 +66,6 @@
     <script src="assets/js/jquery.backstretch.min.js"></script>
     <script src="assets/js/wow.min.js"></script>
     <script src="assets/js/scripts.js"></script>
-
+	
 </body>
-
 </html>
