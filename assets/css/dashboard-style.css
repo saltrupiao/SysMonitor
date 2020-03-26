@@ -11,6 +11,25 @@ body{
     position: relative;
     animation: change 60s ease-in-out infinite;
 }
+#webpage{
+    height: 100vh;
+    width: 100vw;
+}
+#nav-bar{
+    height: 100%;
+    background-color: #252433;
+}
+#widget-holder{
+    height: 100%;
+    
+}
+#collapsed-nav-icon{
+    background-color: #252433;
+}
+
+
+
+
 @keyframes change{
     0%{
         background-position: 0 50%;
