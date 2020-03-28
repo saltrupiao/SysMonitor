@@ -6,7 +6,7 @@
     <style>
         body {
             font-family: "Lato", sans-serif;
-            background-color: #111;
+            background-color: grey;
             color: white;
         }
         
@@ -47,7 +47,7 @@
         .openbtn {
             font-size: 20px;
             cursor: pointer;
-            background-color: #111;
+            background-color: grey;
             color: white;
             padding-top: 5px;
             padding-bottom: 5px;
@@ -61,6 +61,37 @@
         
         .openbtn:hover {
             background-color: #444;
+        }
+        
+        .statBox1,
+        .statBox2 {
+            background-color: Black;
+            overflow: hidden;
+            Padding: 30px;
+            margin: 15px;
+        }
+        
+        .overallStat {
+            text-align: center;
+        }
+        
+        .h,
+        .p2 {
+            text-align: center;
+        }
+        
+        .cpu1,
+        .cpu2 {
+            float: left;
+            width: 33.33%;
+            padding: 10px;
+            height: 300px;
+        }
+        
+        .cpu3:after {
+            content: "";
+            display: table;
+            clear: both;
         }
         
         #main {
@@ -83,8 +114,16 @@
     <div id="mySidebar" class="sidebar"> <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a> <a href="#">Memes</a> <a href="#">Services</a> <a href="#">Clients</a> <a href="#">Contact</a> </div>
     <div id="main">
         <button class="openbtn" onclick="test()"><a class="btn">☰</a></button>
-        <h2>Memes</h2>
-        <p>Testing to see if that actually pushes the content over to the side.</p>
+        <h2 class="h">Memes</h2>
+        <p class="p2"> sting to see if that actually pushes the content over to the side.</p>
+        <div class="statBox1">
+            <section class="overallStat">alot of memes would be going in this section and it would be filled with memes from head to toe and conver all the space in this section, to prove to you that memes are the greatest thing on this planet.</section>
+        </div>
+        <div class="statBox2">
+            <section class="cpu1">The first computer stats would be going here.</section>
+            <section class="cpu2">The second computer stats would be going here.</section>
+            <section class="cpu3">The Third computer stats would be going here.</section>
+        </div>
     </div>
     <script>
         function openNav() {
