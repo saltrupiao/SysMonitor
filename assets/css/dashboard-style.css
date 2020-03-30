@@ -19,6 +19,11 @@ body{
     height: 100%;
     background-color: #252433;
 }
+#nav-bar-side{
+    height: 100%;
+    background-color: #252433;
+
+}
 #widget-holder{
     height: 100%;
     
@@ -28,7 +33,47 @@ body{
 }
 
 
+.wrapper {
+    display: flex;
+    align-items: stretch;
+}
 
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    min-height: 100vh;
+    background-color: black;
+}
+
+#sidebar.active {
+    margin-left: -250px;
+}
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+#sidebarCollapse img{
+    height: 2vh;
+}
+
+
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+}
 
 @keyframes change{
     0%{
