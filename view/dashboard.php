@@ -1,86 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
+    <!---------------------------------------------------
+    SIDEBAR - https://bootstrapious.com/p/bootstrap-sidebar
+
+    Copyright (c) 2015 Ondrej
+    ---------------------------------------------------->
+    
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="System Monitor">
 
     <title>System Monitor</title>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="stylesheet" href="../assets/css/animate.css">
     <link rel="stylesheet" href="../assets/css/media-queries.css">
+    
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+    
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-dark fixed-top navbar-expand-md">
-        <div class="container">
-            <a class="navbar-brand" href="">System Monitor</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <form class="nav-link navbar-form" action="">
-                            <button class="btn" data-toggle="modal" data-target="#profile">Profile</button>
-                        </form>
-                    </li>
-                    <li class="nav-item">
-                        <button onclick="location.href='../index.php';" id="loginBtn" class="btn btn-primary">
-                            Logout
-                        </button>
-                    </li>
-                </ul>
+    
+<!---------------------------------------------------
+    SIDEBAR
+----------------------------------------------------->
+    
+    <div class="wrapper">
+        
+        <!-- Sidebar  -->
+        <nav id="sidebar" class="bg-dark">
+            <div class="sidebar-header text-center">
+                <img src="../assets/img/backgrounds/dashboard.svg" alt="usrImg" style="width: 30%; height: 30%;">
+                <h3>System Monitor</h3>
             </div>
-        </div>
-    </nav>
 
-    <div class="main-content">
-        <div class="container">
+            <ul class="list-unstyled components">
+                <p>Command Center</p>
+                <li class="active">
+                    <a href="#clientSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Clients</a>
+                    <ul class="collapse list-unstyled" id="clientSubmenu">
+                        <li>
+                            <a href="#">Client 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Client 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Client 3</a>
+                        </li>
+                        <li>
+                            <a href="#">Client 4</a>
+                        </li>
+                        <li>
+                            <a href="#">Client 5</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Profile</a>
+                </li>
+                <li>
+                    <a href="#">Help</a>
+                </li>
+                <li>
+                    <a href="#">Settings</a>
+                </li>
+            </ul>
 
-        </div>
-    </div>
+            <ul class="list-unstyled CTAs">
+                <li>
+                    <a href="https://github.com/saltrupiao/SysMonitor/archive/master.zip" class="download">Download source</a>
+                </li>
+            </ul>
+        </nav>
 
-    <!-- Modal Example -->
-    <div class="modal fade" id="profile">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">Title</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <div class="container mt-3">
-
+        <!-- Page Content  -->
+        <div id="content">
+            
+            <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+                    
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item pr-4 pt-2">
+                                <p><img src="../assets/img/user.jpg" alt="usrImg" style="width: 40px; height: 40px; border-radius: 50%;">&nbsp;&nbsp;Welcome, User!</p>
+                            </li>
+                            <li class="nav-item pt-2">
+                                <button onclick="location.href='../index.php';" id="logBtn" class="btn btn-primary">
+                                    Logout
+                                </button>
+                            </li>
+                        </ul>
                     </div>
                 </div>
+            </nav>
 
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <div class="container-fluid">
+                <h2>Systems Overview</h2>
+                <div class="card-deck">
+                    <div class="card bg-primary">
+                        <div class="card-body text-center">
+                            <p class="card-text">CLIENTS(#)</p>
+                            <p class="card-text">CLIENTS(#)</p>
+                            <p class="card-text">CLIENTS(#)</p>
+                            <p class="card-text">CLIENTS(#)</p>
+                        </div>
+                    </div>
+                    <div class="card bg-warning">
+                        <div class="card-body text-center">
+                            <p class="card-text">CPU</p>
+                        </div>
+                    </div>
+                    <div class="card bg-success">
+                        <div class="card-body text-center">
+                            <p class="card-text">MEMORY</p>
+                        </div>
+                    </div>
+                    <div class="card bg-danger">
+                        <div class="card-body text-center">
+                            <p class="card-text">NETWORK</p>
+                        </div>
+                    </div>  
                 </div>
             </div>
-        </div>
-    </div>
+            
+            <div class="line"></div>
 
+            <div class="container-fluid">
+                <h2>CPU</h2>
+                <div id="cpuAccordion">
+                    <div class="card bg-dark text-white">
+                        <div class="card-header">
+                            <a class="card-link" data-toggle="collapse" href="#cpuCollapseOne">
+                                Cores
+                            </a>
+                        </div>
+                        <div id="cpuCollapseOne" class="collapse show" data-parent="#cpuAccordion">
+                            <div class="card-body">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card bg-dark text-white">
+                        <div class="card-header">
+                            <a class="collapsed card-link" data-toggle="collapse" href="#cpuCollapseTwo">
+                                Disk
+                            </a>
+                        </div>
+                        <div id="cpuCollapseTwo" class="collapse" data-parent="#cpuAccordion">
+                            <div class="card-body">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="line"></div>
+
+            <div class="container-fluid">
+                <h2>Memory</h2>
+                <div id="memAccordion">
+                    <div class="card bg-dark text-white">
+                        <div class="card-header">
+                            <a class="card-link" data-toggle="collapse" href="#memCollapseOne">
+                                Summary
+                            </a>
+                        </div>
+                        <div id="memCollapseOne" class="collapse show" data-parent="#memAccordion">
+                            <div class="card-body">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="line"></div>
+
+            <div class="container-fluid">
+                <h2>Network</h2>
+                <div id="netAccordion">
+                    <div class="card bg-dark text-white">
+                        <div class="card-header">
+                            <a class="card-link" data-toggle="collapse" href="#netCollapseOne">
+                                Addresses
+                            </a>
+                        </div>
+                        <div id="netCollapseOne" class="collapse show" data-parent="#netAccordion">
+                            <div class="card-body">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card bg-dark text-white">
+                        <div class="card-header">
+                            <a class="collapsed card-link" data-toggle="collapse" href="#netCollapseTwo">
+                                Interfaces
+                            </a>
+                        </div>
+                        <div id="netCollapseTwo" class="collapse" data-parent="#netAccordion">
+                            <div class="card-body">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+    
     <!-- Javascript -->
     <script src="../assets/js/jquery-3.3.1.min.js"></script>
     <script src="../assets/js/jquery-migrate-3.0.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     <script src="../assets/js/jquery.backstretch.min.js"></script>
     <script src="../assets/js/wow.min.js"></script>
-    <script src="../assets/js/scripts.js"></script>
-
+    <script src="../assets/js/dashboardScripts.js"></script>
+    
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    
+    <!-- jQuery Custom Scroller CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+    
 </body>
 </html>

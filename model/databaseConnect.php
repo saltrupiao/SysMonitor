@@ -1,6 +1,6 @@
 <?php
-$dsn = 'mysql:host=localhost;dbname=dundermifflindb';
-$username = 'root';
+$dsn = 'mysql:host=localhost;dbname=';
+$username = '';
 $password = '';
 
 try {
