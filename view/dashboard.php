@@ -168,7 +168,7 @@
                         </div>
                         <div id="cpuCollapseTwo" class="collapse" data-parent="#cpuAccordion">
                             <div class="card-body">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                <canvas id="doughnutChart"></canvas>
                             </div>
                         </div>
                     </div>
@@ -289,6 +289,7 @@
     <script src="../assets/js/wow.min.js"></script>
     <script src="../assets/js/Chart.bundle.js"></script>
     <script src="../assets/js/dashboardScripts.js"></script>
+    <script src="../assets/js/pieChart.js"></script>
     <script src="../assets/js/dynamic-graph.js"></script>
     
     <!-- Popper.JS -->

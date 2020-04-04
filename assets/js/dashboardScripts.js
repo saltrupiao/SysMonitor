@@ -1,6 +1,9 @@
 
 jQuery(document).ready(function() { 
     
+    /*
+        Custom Sidebar
+    */
     $("#sidebar").mCustomScrollbar({
         theme: "minimal"
     });
