@@ -230,67 +230,57 @@
     </div>
     
     <!-- Profile Modal -->
-    <div class="modal fade" id="profileModal" role="dialog">
-		<div class="modal-dialog">
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="card card-fluid">
-					<h6 class="card-header"> Account </h6>
-					<!-- .card-body -->
-					<div class="card-body">
-						<!-- form -->
-						<form method="post">
-							<!-- form row -->
-							<div class="form-row">
-								<!-- form column -->
-								<div class="col-md-6 mb-3">
-									<label for="input01">First Name</label>
-									<input type="text" class="form-control" id="input01" value="Beni" required=""> 
-								</div>
-								<!-- /form column -->
-								<!-- form column -->
-								<div class="col-md-6 mb-3">
-									<label for="input02">Last Name</label>
-									<input type="text" class="form-control" id="input02" value="Arisandi" required=""> 
-								</div>
-								<!-- /form column -->
-							</div>
-							<!-- /form row -->
-							<!-- .form-group -->
-							<div class="form-group">
-								<label for="input03">Email</label>
-								<input type="email" class="form-control" id="input03" value="bent10@looper.com" required=""> 
-							</div>
-							<!-- /.form-group -->
-							<!-- .form-group -->
-							<div class="form-group">
-								<label for="input04">New Password</label>
-								<input type="password" class="form-control" id="input04" value="secret" required=""> 
-							</div>
-							<!-- /.form-group -->
-							<!-- .form-group -->
-							<div class="form-group">
-								<label for="input05">Username</label>
-								<input type="text" class="form-control" id="input05" value="bent10" required="">
-								<small class="text-muted">Dolores reiciendis, eos accusamus nobis at omnis consequuntur culpa tempore saepe animi.</small>
-							</div>
-							<!-- /.form-group -->
-							<hr>
-							<!-- .form-actions -->
-							<div class="form-actions">
-								<!-- enable submit btn when user type their current password -->
-								<input type="password" class="form-control ml-auto mr-3" id="input06" placeholder="Enter Current Password" required="">
-								<button type="submit" class="btn btn-primary" disabled="">Update Account</button>
-							</div>
-							<!-- /.form-actions -->
-						</form>
-						<!-- /form -->
-					</div>
-					<!-- /.card-body -->
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="modal fade" id="profileModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h4 class="modal-title">Profile Settings</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form action="" method="post">
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label for="input01">First Name</label>
+                                <input type="text" class="form-control" id="input01" value="" placeholder="first name" required> 
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="input02">Last Name</label>
+                                <input type="text" class="form-control" id="input02" value="" placeholder="last name" required> 
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input03">Email</label>
+                            <input type="email" class="form-control" id="input03" value="" placeholder="email address" required> 
+                        </div>
+                        <div class="form-group">
+                            <label for="input04">New Password</label>
+                            <input type="password" class="form-control" id="input04" value="" placeholder="new password" required> 
+                        </div>
+                        <div class="form-group">
+                            <label for="input05">Username</label>
+                            <input type="text" class="form-control" id="input05" value="" placeholder="username" required>
+                        </div>
+                        <hr>
+                        <div class="form-actions">
+                            <input type="password" class="form-control" id="input06" placeholder="Enter Current Password" required>
+                            <button type="submit" name="action" value="updateProfile" class="btn btn-primary mt-3">Update Account</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
     <!-- Javascript -->
     <script src="../assets/js/jquery-3.3.1.min.js"></script>
