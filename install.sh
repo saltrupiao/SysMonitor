@@ -3,9 +3,8 @@
 # =================================================================
 # Description: (***Execute script as sudo***)
 #		1.) Installs python3, psutil, rsync.
-# 		2.) Creates sysInfo folder in current working directory 
-#		3.) Sets privlages on privateKey.pem
-#		4.) Creates cron job to execute networkinfo.sh file 
+# 	2.) Creates sysInfo folder in current working directory 
+#		3.) Creates cron job to execute networkinfo.sh file 
 # =================================================================
 
 user = $1;
@@ -23,11 +22,6 @@ yum -y install rsync
 
 # create folder to store logs
 mkdir $installdir/sysInfo
-
-# set privlages on private key
-mkdir -p ~/.ssh/sysmonitor
-cp id_rsa ~/.ssh/sysmonitor/
-chmod 600 ~/.ssh/sysmonitor/id_rsa
 
 # create cron job to execute bash script
 # append user to allow list
