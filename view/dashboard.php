@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
     
 </head>
-<body>
+<body id="body">
     
 <!---------------------------------------------------
     SIDEBAR
@@ -90,7 +90,7 @@
         <!-- Page Content  -->
         <div id="content">
             
-            <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+            <nav class="navbar navbar-expand-lg navbar-light bg-dark sticky-top">
                 <div class="container-fluid">
                     <button type="button" id="sidebarCollapse" class="btn btn-info">
                         <i class="fas fa-align-left"></i>
@@ -116,30 +116,39 @@
 
             <div class="container-fluid">
                 <h2>Systems Overview</h2>
-                <div class="card-deck">
-                    <div class="card bg-primary">
-                        <div class="card-body text-center">
-                            <p class="card-text">CLIENTS(#)</p>
-                            <p class="card-text">CLIENTS(#)</p>
-                            <p class="card-text">CLIENTS(#)</p>
-                            <p class="card-text">CLIENTS(#)</p>
+                <div id="overviewAccordion">
+                    <div class="card bg-dark text-white">
+                        <div class="card-header">
+                            <a class="card-link" data-toggle="collapse" href="#overviewCollapse">
+                                Summary
+                            </a>
+                        </div>
+                        <div id="overviewCollapse" class="collapse show" data-parent="#overviewAccordion">
+                            <div class="card-body">
+                                <canvas id="doughnutChart" class="mx-auto" style="max-width: 50%; min-width: 45%;"></canvas>
+                            </div>
                         </div>
                     </div>
-                    <div class="card bg-warning">
-                        <div class="card-body text-center">
-                            <p class="card-text">CPU</p>
+                </div>
+            </div>
+            
+            <div class="line"></div>
+            
+            <div class="container-fluid">
+                <h2>Storage</h2>
+                <div id="diskAccordion">
+                    <div class="card bg-dark text-white">
+                        <div class="card-header">
+                            <a class="card-link" data-toggle="collapse" href="#diskCollapse">
+                                Disk
+                            </a>
+                        </div>
+                        <div id="diskCollapse" class="collapse show" data-parent="#diskAccordion">
+                            <div class="card-body">
+                                <canvas id="diskBarChart" width="400" height="150"></canvas>
+                            </div>
                         </div>
                     </div>
-                    <div class="card bg-success">
-                        <div class="card-body text-center">
-                            <p class="card-text">MEMORY</p>
-                        </div>
-                    </div>
-                    <div class="card bg-danger">
-                        <div class="card-body text-center">
-                            <p class="card-text">NETWORK</p>
-                        </div>
-                    </div>  
                 </div>
             </div>
             
@@ -147,28 +156,16 @@
 
             <div class="container-fluid">
                 <h2>CPU</h2>
-                <div id="cpuAccordion">
+                <div id="coresAccordion">
                     <div class="card bg-dark text-white">
                         <div class="card-header">
-                            <a class="card-link" data-toggle="collapse" href="#cpuCollapseOne">
-                                Cores
+                            <a class="card-link" data-toggle="collapse" href="#coresCollapse">
+                                Logical Cores
                             </a>
                         </div>
-                        <div id="cpuCollapseOne" class="collapse show" data-parent="#cpuAccordion">
+                        <div id="coresCollapse" class="collapse show" data-parent="#coresAccordion">
                             <div class="card-body">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card bg-dark text-white">
-                        <div class="card-header">
-                            <a class="collapsed card-link" data-toggle="collapse" href="#cpuCollapseTwo">
-                                Disk
-                            </a>
-                        </div>
-                        <div id="cpuCollapseTwo" class="collapse" data-parent="#cpuAccordion">
-                            <div class="card-body">
-                                <canvas id="doughnutChart"></canvas>
+                                <canvas id="coresBarChart" width="400" height="150"></canvas>
                             </div>
                         </div>
                     </div>
@@ -182,12 +179,14 @@
                 <div id="memAccordion">
                     <div class="card bg-dark text-white">
                         <div class="card-header">
-                            <a class="card-link" data-toggle="collapse" href="#memCollapseOne">
+                            <a class="card-link" data-toggle="collapse" href="#memCollapse">
                                 Summary
                             </a>
                         </div>
-                        <div id="memCollapseOne" class="collapse show" data-parent="#memAccordion">
-                            <canvas id="myChart" width="400" height="150"></canvas>
+                        <div id="memCollapse" class="collapse show" data-parent="#memAccordion">
+                            <div class="card-body">
+                                <canvas id="memoryBarChart" width="400" height="150"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -200,25 +199,44 @@
                 <div id="netAccordion">
                     <div class="card bg-dark text-white">
                         <div class="card-header">
-                            <a class="card-link" data-toggle="collapse" href="#netCollapseOne">
-                                Addresses
+                            <a class="card-link" data-toggle="collapse" href="#netCollapse">
+                                Summary
                             </a>
                         </div>
-                        <div id="netCollapseOne" class="collapse show" data-parent="#netAccordion">
+                        <div id="netCollapse" class="collapse show" data-parent="#netAccordion">
                             <div class="card-body">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card bg-dark text-white">
-                        <div class="card-header">
-                            <a class="collapsed card-link" data-toggle="collapse" href="#netCollapseTwo">
-                                Interfaces
-                            </a>
-                        </div>
-                        <div id="netCollapseTwo" class="collapse" data-parent="#netAccordion">
-                            <div class="card-body">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                <div class="table-responsive-lg">
+                                    <table class="table table-dark table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Interface</th>
+                                                <th>Ipv4</th>
+                                                <th>Ipv6</th>
+                                                <th>Mac</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>enp7s0</td>
+                                                <td>192.168.0.12</td>
+                                                <td>26.1:409:8404:1700::9</td>
+                                                <td>26.1:409:8404:1700:52ef:ec99:efdc:f79</td>
+                                            </tr>
+                                            <tr>
+                                                <td>lo</td>
+                                                <td>127.0.0.1</td>
+                                                <td>::1</td>
+                                                <td>00:00:00:00:00:00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>wlp6s0</td>
+                                                <td>46:53:69:13:b4:7d</td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -288,9 +306,11 @@
     <script src="../assets/js/jquery.backstretch.min.js"></script>
     <script src="../assets/js/wow.min.js"></script>
     <script src="../assets/js/Chart.bundle.js"></script>
-    <script src="../assets/js/dashboardScripts.js"></script>
-    <script src="../assets/js/pieChart.js"></script>
-    <script src="../assets/js/dynamic-graph.js"></script>
+    <script src="../assets/js/sideNavbar.js"></script>
+    <script src="../assets/js/overviewDoughnutChart.js"></script>
+    <script src="../assets/js/memoryBarChart.js"></script>
+    <script src="../assets/js/diskBarChart.js"></script>
+    <script src="../assets/js/coresBarChart.js"></script>
     
     <!-- Popper.JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>

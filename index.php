@@ -69,7 +69,7 @@
     <script src="assets/js/jquery-migrate-3.0.0.min.js"></script>
     <script src="assets/js/jquery.backstretch.min.js"></script>
     <script src="assets/js/wow.min.js"></script>
-    <script src="assets/js/loginScripts.js"></script>
+    <script src="assets/js/loginPage.js"></script>
     
     <!-- Bootstrap JS -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
