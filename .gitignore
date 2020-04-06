@@ -1,3 +1,2 @@
-./bitnami.tar.gz
-./img.tar.gz
-
+*.gz
+*.tar
