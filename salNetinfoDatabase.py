@@ -92,7 +92,7 @@ def createLog():
 
 def main():
     gatherInfo()
-#    insert()
+    insert()
     printInfo()
     createLog()
 
