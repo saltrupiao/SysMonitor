@@ -2,12 +2,17 @@
 #Following examples from 
 #https://www.programcreek.com/python/example/53878/psutil.disk_usage
 #https://stackoverflow.com/questions/30589571/insert-data-into-mssql-server-using-python
+import time
 import psutil
+import socket
 import os
 import pymysql.cursors
 import pymysql
 
 def gatherInfo():
+    #Hostname
+    global hostName
+    hostName = socket.gethostname()
     #Memory Variables
     mem = psutil.virtual_memory()
     global memTot 
@@ -76,13 +81,20 @@ def insert():
         connection.close()
 
 def printInfo():
-    print("Memory\n------\nMemory Total: " + memTot  + "Gb\nMemory Remaining: " + memRemain + "Gb\nMemory Percentage: " + memPercent + "%\n" )
-    print("Disk Usage\n----------\nDisk Total: " + dskTot + "Gb\nDisk Available: " + dskAvail + "Gb\nDisk Used: " + dskUsed + "Gb\nPercent Used: " + dskPercent + "%\n")
-    print("CPU\n---\nCPU Percentage: " + cpuCore + "%\n")
-    print("Networking Info\n---------------\nInterface: " + netCard + "\nIPv4 address: " + ipv4Address + "\nIPv6 Address: " + ipv6Address + "\nMAC Address: " + macAddress)
+    global info
+    info = "Hostname: " + hostName +"\nMemory\n------\nMemory Total: " + memTot  + "Gb\nMemory Remaining: " + memRemain + "Gb\nMemory Percentage: " + memPercent + "%\n" + "Disk Usage\n----------\nDisk Total: " + dskTot + "Gb\nDisk Available: " + dskAvail + "Gb\nDisk Used: " + dskUsed + "Gb\nPercent Used: " + dskPercent + "%\n" + "CPU\n---\nCPU Percentage: " + cpuCore + "%\n" +"Networking Info\n---------------\nInterface: " + netCard + "\nIPv4 address: " + ipv4Address + "\nIPv6 Address: " + ipv6Address + "\nMAC Address: " + macAddress
+    print(info)
+
+def createLog():
+    timestamp = time.strftime("%Y-%m-%dT%H-%M")
+    destFile = hostName + timestamp + ".log"
+    my_file = open(destFile, 'ab')
+    my_file.writelines(info)
+    my_file.close()
 
 def main():
     gatherInfo()
     printInfo()
+    createLog()
 
 main()
