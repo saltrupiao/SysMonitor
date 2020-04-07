@@ -74,8 +74,8 @@ def insert():
     try:
         with connection.cursor() as cursor:
             #Create a new record
-            sql = "INSERT INTO 'sysmonitor' () VALUES (%s, %s)"
-            cursor.execute(sql, (memTot, memRemain, memPercent, dskAvail, dskUsed,))
+            sql = "INSERT INTO 'sysmonitor' (cli_hostname, cli_disk_avil, cli_disk_pctg, cli_disk_total, cli_disk_used, cli_mem_total, cli_mem_remaining, cli_mem_pctg, cli_cpu_cores, cli_nic_name, cli_nic_addr, cli_nic_mac, cli_nic_protocol) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+            cursor.execute(sql, (hostName, dskAvail, dskPercent, dskTot, dskUsed, memTot, memRemain, memPercent, cpuCore, netCard, ipv4Address, macAddress, ipv6Address))
         cursor.commit()
     finally:
         connection.close()
