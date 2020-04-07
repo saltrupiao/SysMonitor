@@ -1,7 +1,6 @@
 import subprocess
 import os
 import signal
-import paramiko
 import pymysql
 import json
 def gatherInfo():
@@ -40,7 +39,7 @@ def insert():
     with open('passwd.txt', 'r') as my_file:
         password = my_file.read().rstrip()
 
-    connection = pymysql.connect(host="localhost",
+    connection = pymysql.connect(host="35.196.30.1",
                                  user="user",
                                  passwd = password,
                                  db="sysmonitor",
@@ -49,8 +48,9 @@ def insert():
     try:
         with connection.cursor() as cursor:
         #Create a new record
-            sql = "INSERT INTO `client` (`cli_hostname`, `cli_disk_avil`, `cli_disk_pctg`, `cli_disk_total`, `cli_disk_used`, `cli_mem_total`, `cli_mem_remaining`, `cli_mem_pctg`, `cli_cpu_cores`, `cli_nic_name`, `cli_nic_addrv4`, `cli_nic_addrv6`, `cli_nic_mac`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-            cursor.execute(sql, (hostName, dskAvail, dskPercent, dskTot, dskUsed, memTot, memRemain, memPercent, cpuCore, netCard, ipv4Address, ipv6Address, macAddress))
+            #sql = "INSERT INTO `client` (`cli_hostname`, `cli_disk_avil`, `cli_disk_pctg`, `cli_disk_total`, `cli_disk_used`, `cli_mem_total`, `cli_mem_remaining`, `cli_mem_pctg`, `cli_cpu_cores`, `cli_nic_name`, `cli_nic_addrv4`, `cli_nic_addrv6`, `cli_nic_mac`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+            sql = "UPDATE client set cli_disk_avil = %s, cli_disk_pctg = %s, cli_disk_total = %s, cli_disk_used = %s, cli_mem_total = %s, cli_mem_remaining = %s, cli_mem_pctg = %s, cli_cpu_cores = %s, cli_nic_name = %s, cli_nic_addrv4 = %s, cli_nic_addrv6 = %s, cli_nic_mac = %s where cli_hostname = %s"
+            cursor.execute(sql, (dskAvail, dskPercent, dskTot, dskUsed, memTot, memRemain, memPercent, cpuCore, netCard, ipv4Address, ipv6Address, macAddress, hostName))
         connection.commit()
         print("New record inserted")
     finally:
