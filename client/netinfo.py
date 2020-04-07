@@ -19,6 +19,9 @@ def bytes2human(n):
 def get_addresses(net):
     info = dict()
     for nic in net.keys():
+        if nic == "lo":
+            continue
+
         nic_interface = dict()
         for i, interface in enumerate(net[nic]):
             if i == 0:
@@ -40,15 +43,16 @@ def retrieve_performance_data():
     net_interfaces = os.listdir('/sys/class/net')
     net = psutil.net_if_addrs()
 
-    perf_data["total_memory"] = mem.total
-    perf_data["available_memory"] = mem.available >> 30
+    perf_data["host_name"] = os.uname()[1]
+    perf_data["total_memory"] = round(mem.total/10**9, 2)
+    perf_data["available_memory"] = round(mem.available/10**9, 2)
     perf_data["memory_percent"] = mem.percent
-    perf_data["disk_usage"] = bytes2human(disk.total)
-    perf_data["disk_free"] = bytes2human(disk.free)
-    perf_data["disk_used"] = bytes2human(disk.used)
+    perf_data["disk_usage"] = round(disk.total/10**9, 2)
+    perf_data["disk_free"] = round(disk.free/10**9, 2)
+    perf_data["disk_used"] = round(disk.used/10**9, 2)
     perf_data["disk_percent"] = disk.percent
     perf_data["cpus"] = cpu
-    perf_data["cpu_avg_percent"] = sum(cpu)/len(cpu)
+    perf_data["cpu_avg_percent"] = float(str(sum(cpu)/len(cpu))[0:4])
     perf_data["network_interfaces"] = net_interfaces
     perf_data["network_addresses"] = get_addresses(net)
 
