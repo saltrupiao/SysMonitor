@@ -38,6 +38,10 @@ def gatherInfo():
     global cpuCore
     cpuCore = str(cpu[0])
 
+    numCPU = psutil.cpu_count()
+    global cpuCount
+    cpuCount = str(numCPU)
+
    # print("\nNetwork info\n------------")
 
     net = psutil.net_if_addrs()
@@ -60,12 +64,12 @@ def gatherInfo():
         print("Only loopback interface available")
 
 def insert():
-#    with open('passwd.txt', 'r') as my_file:
-#        password = my_file.read().rstrip()
+    with open('passwd.txt', 'r') as my_file:
+        password = my_file.read().rstrip()
 
     connection = pymysql.connect(host="35.196.30.1",
                                  user="user",
-                                 passwd = "GuoJ1RaadXHf",
+                                 passwd = password,
                                  db="sysmonitor",
                                  charset='utf8mb4',
                                  cursorclass=pymysql.cursors.DictCursor)
