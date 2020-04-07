@@ -4,7 +4,7 @@ import signal
 import json
 import pymysql
 def gatherInfo():
-    ps = subprocess.Popen(('cat', 'test.py'), stdout=subprocess.PIPE)
+    ps = subprocess.Popen(('cat', 'grabData.py'), stdout=subprocess.PIPE)
     output = subprocess.check_output(['ssh', 'frozenpizzas4567@34.71.205.185', ' python3 -'], stdin=ps.stdout)
     newList = list(output.split(','))
     global hostName
