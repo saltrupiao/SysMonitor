@@ -1,6 +1,7 @@
 #!/bin/env python
 #Following examples from 
 #https://www.programcreek.com/python/example/53878/psutil.disk_usage
+#https://stackoverflow.com/questions/372885/how-do-i-connect-to-a-mysql-database-in-python
 
 import psutil
 import os
@@ -12,17 +13,21 @@ print("Memory\n------\nMemory Total: " + str(mem.total >> 30)  + "Gb\nMemory Rem
 print("Disk Usage\n----------")
 print("Disk Total: " + str(disk.total >> 30) + "Gb\nDisk Available: " + str(disk.free >> 30) + "Gb\nDisk Used: " + str(disk.used >> 30) + "Gb\nPercent Used: " + str(disk.percent) + "%\n")
 print("CPU\n---")
-i = 0
-for core in cpu:
-    print("cpu core " + str(i) + ": " + str(cpu[i]) + "%")
-    i = i + 1
-i = 0
+#print(cpu[0])
+#i = 0
+cpuCore = str(cpu[0])
+
+print("cpu core "+ cpuCore)
+#for core in cpu:
+#    print("cpu core " + str(i) + ": " + str(cpu[i]) + "%")
+#    i = i + 1
+#i = 0
 print("\nNetwork info\n------------")
-netInterfaces = os.listdir('/sys/class/net')
-for interface in netInterfaces:
-    #print("Interface: " + netInterfaces[i])
-    i = i + 1
-i = 0
+#netInterfaces = os.listdir('/sys/class/net')
+#for interface in netInterfaces:
+#    #print("Interface: " + netInterfaces[i])
+#    i = i + 1
+#i = 0
 net = psutil.net_if_addrs()
 
 for nic in net.keys():
