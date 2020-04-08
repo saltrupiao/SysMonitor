@@ -2,26 +2,24 @@ var ctx = document.getElementById('diskBarChart');
 
 Chart.defaults.global.defaultFontColor = '#fff';
 
+var dts
+
 function client_data() {
-  data = {}
   getClientPerfData()
       .then(data => {
-        data = data.system_performance_data
-      })
-      .catch(error => {
-        console.error(error)
-      })
+        console.log(data)
+        let data = data.system_performance_data
 
-  disk_free = []
+  let disk_free = []
   data.forEach(c => disk_free.append(c.disk_free))
 
-  disk_usage = []
+  let disk_usage = []
   data.forEach(c => disk_usage.append(c.disk_used))
 
-  disk_total = []
+  let disk_total = []
   data.forEach(c => disk_used.append(c.disk_total))
 
-  var dts = [
+  dts = [
     {
         label : "Disk Free (MB)",
         data : disk_free,
@@ -107,6 +105,10 @@ function client_data() {
         borderWidth : 1
     }
   ];
+      })
+      .catch(error => {
+        console.error(error)
+      })
 }
 
 const getClientPerfData = async () => {
