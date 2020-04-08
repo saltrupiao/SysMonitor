@@ -20,12 +20,17 @@ def create_parser():
     parser = ArgumentParser(description="""
     Used to pull data from clients and insert/update the database
     """)
-    parser.add_argument("--method", default="ssh", choices=['ssh', 'json'], help="Choose between REST API or SSH")
+    parser.add_argument("--method", default="json", choices=['ssh', 'json'], help="Choose between REST API or SSH")
     parser.add_argument("--firstTime", type=bool, help="If the first time it will insert a record instead of updating one")
 
     return parser
+def testOutput():
+        output = str(subprocess.check_output(['curl', host + '/perfdata']))
+        print(output)
+    
 
 def gatherInfo(mode):
+    global info
     if mode == 'ssh':
         print("Using SSH")
         ps = subprocess.Popen(('cat', '/usr/local/bin/grabData.py'), stdout=subprocess.PIPE)
@@ -33,10 +38,11 @@ def gatherInfo(mode):
         newList = list(output.split(','))
     elif mode == 'json':
         print("Using JSON/REST")
-        output = subprocess.check_output(['curl', '34.71.205.185/perfdata'])
+        output = subprocess.check_output(['curl', host + '/perfdata'])
+        info = output
         data = json.loads(output)
         net = data["system_performance_data"]["network_addresses"][list(data["system_performance_data"]["network_addresses"])[0]]
-        newList = (data["system_performance_data"]["host_name"],data["system_performance_data"]["total_memory"],data["system_performance_data"]["available_memory"],data["system_performance_data"]["memory_percent"],data["system_performance_data"]["disk_usage"],data["system_performance_data"]["disk_used"],data["system_performance_data"]["disk_free"],data["system_performance_data"]["disk_percent"],data["system_performance_data"]["cpu_avg_percent"],str(list(data["system_performance_data"]["network_addresses"])[0]),net["ipv4"],net["ipv6"],net["mac"])
+        newList = (data["system_performance_data"]["host_name"],data["system_performance_data"]["total_memory"],data["system_performance_data"]["available_memory"],data["system_performance_data"]["memory_percent"],data["system_performance_data"]["disk_total"],data["system_performance_data"]["disk_used"],data["system_performance_data"]["disk_free"],data["system_performance_data"]["disk_percent"],data["system_performance_data"]["cpu_avg_percent"],str(list(data["system_performance_data"]["network_addresses"])[0]),net["ipv4"],net["ipv6"],net["mac"])
 
     global hostName
     global memTot
@@ -53,18 +59,18 @@ def gatherInfo(mode):
     global macAddress
 
     
-    hostName = newList[0]
-    memTot = newList[1]
-    memRemain = newList[2]
-    memPercent = newList[3]
-    dskTot = newList[4]
-    dskUsed = newList[5]
-    dskAvail = newList[6]
-    dskPercent = newList[7]
-    cpuCore = newList[8]
-    netCard = newList[9]
-    ipv4Address = newList[10]
-    ipv6Address = newList[11]
+    hostName = str(newList[0])
+    memTot = str(newList[1])
+    memRemain = str(newList[2])
+    memPercent = str(newList[3])
+    dskTot = str(newList[4])
+    dskUsed = str(newList[5])
+    dskAvail = str(newList[6])
+    dskPercent = str(newList[7])
+    cpuCore = str(newList[8])
+    netCard = str(newList[9])
+    ipv4Address = str(newList[10])
+    ipv6Address = str(newList[11])
     macAddress = str(newList[12]).rstrip()
 
 def update():
@@ -90,6 +96,15 @@ def insert():
     finally:
         connection.close()
 
+def printInfo():
+        info = str("Hostname: " + hostName +"\nMemory\n------\nMemory Total: " + memTot  + "Gb\nMemory Remai    ning: " + memRemain + "Gb\nMemory Percentage: " + memPercent + "%\n" + "Disk Usage\n----------\nDisk     Total: " + dskTot + "Gb\nDisk Available: " + dskAvail + "Gb\nDisk Used: " + dskUsed + "Gb\nPercentUsed: " + dskPercent + "%\n" + "CPU\n---\nCPU Percentage: " + cpuCore + "%\n" +"Networking Info\n---------------\nInterface: " + netCard + "\nIPv4 address: " + ipv4Address + "\nIPv6 Address: " + ipv6Address + "\nMAC Address: " + macAddress)
+def writeLog():
+        destFile = "/opt/bitnami/apache2/htdocs/assets/js/perfData-" + hostName + ".log"
+        my_file = open(destFile, 'w')
+        my_file.writelines(info)
+        my_file.close()
+
+
 def main():
     import subprocess
     import os
@@ -99,12 +114,21 @@ def main():
     global timestamp
     timestamp = time.strftime("%Y-%m-%dT%H-%M", time.localtime())
     args = create_parser().parse_args()
-    gatherInfo(args.method.lower())
-    createConnection()
-    if args.firstTime:
-        insert()
-    else:
-        update()
+    hosts = ['34.71.205.185']
+    i = 0
+    for IP in hosts:
+        global host
+        host = IP
+        #print(host)
+       # testOutput()
+        gatherInfo(args.method.lower())
+ #       printInfo()
+        writeLog()
+    #createConnection()
+    #if args.firstTime:
+    #    insert()
+    #else:
+    #    update()
 
 main()
 #gatherInfoSSH()
