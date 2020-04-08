@@ -2,13 +2,9 @@ var ctx = document.getElementById('diskBarChart');
 
 Chart.defaults.global.defaultFontColor = '#fff';
 
-var dts
-
 function client_data() {
-  getClientPerfData()
-      .then(data => {
-        console.log(data)
-        let data = data.system_performance_data
+  let data = getClientPerfData().system_performace_data
+  console.log(data)
 
   let disk_free = []
   data.forEach(c => disk_free.append(c.disk_free))
@@ -19,7 +15,7 @@ function client_data() {
   let disk_total = []
   data.forEach(c => disk_used.append(c.disk_total))
 
-  dts = [
+  let dts = [
     {
         label : "Disk Free (MB)",
         data : disk_free,
@@ -105,14 +101,11 @@ function client_data() {
         borderWidth : 1
     }
   ];
-      })
-      .catch(error => {
-        console.error(error)
-      })
+  return dts
 }
 
-const getClientPerfData = async () => {
-  const response = await fetch("http://35.196.30.1:8080/perfdata", {
+const getClientPerfData = async() => {
+  const respone = fetch("http://35.196.30.1:8080/perfdata", {
       method: 'GET',
       mode: 'no-cors',
       cache: 'no-cache',
@@ -122,20 +115,20 @@ const getClientPerfData = async () => {
       },
       referPolicy: 'no-referer'
   })
-  const newData = await response.json()
+  const newData = response.json()
 
-  return newData
+  return response.json()
 }
 
-var data = {
+var chart_data = {
     labels: ["Client 1", "Client 2", "Client 3", "Client 4", "Client 5"],
     fontColor: '#fff',
     datasets: client_data()
-};
+}
 
 var lineGraph = new Chart(ctx, {
     type: 'bar',
-    data: data,
+    data: chart_data,
     options: {
         scales: {
             yAxes : [{
