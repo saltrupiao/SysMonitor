@@ -2,10 +2,29 @@ var ctx = document.getElementById('diskBarChart');
 
 Chart.defaults.global.defaultFontColor = '#fff';
 
-var dts = [
+function client_data() {
+  data = {}
+  getClientPerfData()
+      .then(data => {
+        data = data.system_performance_data
+      })
+      .catch(error => {
+        console.error(error)
+      })
+
+  disk_free = []
+  data.forEach(c => disk_free.append(c.disk_free))
+
+  disk_usage = []
+  data.forEach(c => disk_usage.append(c.disk_used))
+
+  disk_total = []
+  data.forEach(c => disk_used.append(c.disk_total))
+
+  var dts = [
     {
         label : "Disk Free (MB)",
-        data : [20, 35, 40, 50, 60],
+        data : disk_free,
         backgroundColor : [
             'rgba(255, 255, 0, 0.5)',  /* Yellow */
             'rgba(255, 255, 0, 0.5)',
@@ -26,7 +45,7 @@ var dts = [
     },
     {
         label : "Disk Usage (%)",
-        data : [20, 35, 40, 50, 60],
+        data : disk_usage,
         backgroundColor : [
             'rgba(204, 204, 0, 0.5)',  /* Dark-yellow1 */
             'rgba(204, 204, 0, 0.5)',
@@ -47,7 +66,7 @@ var dts = [
     },
     {
         label : "Disk Usage (MB)",
-        data : [20, 35, 40, 50, 60],
+        data : disk_total, // TODO: FIX THIS :)
         backgroundColor : [
             'rgba(153, 153, 0, 0.5)',  /* Dark-yellow2 */
             'rgba(153, 153, 0, 0.5)',
@@ -68,7 +87,7 @@ var dts = [
     },
     {
         label : "Disk Used (MB)",
-        data : [20, 35, 40, 50, 60],
+        data : disk_used,
         backgroundColor : [
             'rgba(102, 102, 0, 0.5)',  /* Dark-yellow3 */
             'rgba(102, 102, 0, 0.5)',
@@ -87,12 +106,20 @@ var dts = [
         ],
         borderWidth : 1
     }
-];
+  ];
+}
+
+const getClientPerfData = async () => {
+  const response = await fetch("http://35.196.30.1:8080/perfdata")
+  const newData = await response.json()
+
+  return newData
+}
 
 var data = {
     labels: ["Client 1", "Client 2", "Client 3", "Client 4", "Client 5"],
     fontColor: '#fff',
-    datasets: dts
+    datasets: client_data()
 };
 
 var lineGraph = new Chart(ctx, {
