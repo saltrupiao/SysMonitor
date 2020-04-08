@@ -112,7 +112,16 @@ function client_data() {
 }
 
 const getClientPerfData = async () => {
-  const response = await fetch("http://35.196.30.1:8080/perfdata")
+  const response = await fetch("http://35.196.30.1:8080/perfdata", {
+      method: 'GET',
+      mode: 'no-cors',
+      cache: 'no-cache',
+      credentials: 'omit',
+      headers: {
+         'Content-Type': 'application/json'
+      },
+      referPolicy: 'no-referer'
+  })
   const newData = await response.json()
 
   return newData
