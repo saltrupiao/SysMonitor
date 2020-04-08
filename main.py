@@ -1,4 +1,5 @@
 import subprocess
+import time
 import os
 import signal
 import json
@@ -49,7 +50,7 @@ def gatherInfoJSON():
 
 def gatherInfoSSH():
     print("Using SSH")
-    ps = subprocess.Popen(('cat', 'grabData.py'), stdout=subprocess.PIPE)
+    ps = subprocess.Popen(('cat', '/usr/local/bin/grabData.py'), stdout=subprocess.PIPE)
     output = subprocess.check_output(['ssh', 'frozenpizzas4567@34.71.205.185', ' python3 -'], stdin=ps.stdout)
     newList = list(output.split(','))
     global hostName
@@ -83,7 +84,7 @@ def gatherInfoSSH():
     macAddress = str(newList[12]).rstrip()
 
 def update():
-    with open('passwd.txt', 'r') as my_file:
+    with open('/usr/local/bin/passwd.txt', 'r') as my_file:
         password = my_file.read().rstrip()
 
     connection = pymysql.connect(host="localhost",
@@ -95,15 +96,15 @@ def update():
     try:
         with connection.cursor() as cursor:
         #Create a new record
-            sql = "UPDATE `client` set `cli_disk_avil` = %s, `cli_disk_pctg` = %s, `cli_disk_total` = %s, `cli_disk_used` = %s, `cli_mem_total` = %s, `cli_mem_remaining` = %s, `cli_mem_pctg` = %s, `cli_cpu_cores` = %s, `cli_nic_name` = %s, `cli_nic_addrv4` = %s, `cli_nic_addrv6` = %s, `cli_nic_mac` = %s where `cli_hostname` = %s"
-            cursor.execute(sql, (dskAvail, dskPercent, dskTot, dskUsed, memTot, memRemain, memPercent, cpuCore, netCard, ipv4Address, ipv6Address, macAddress, hostName))
+            sql = "UPDATE `client` set `cli_disk_avil` = %s, `cli_disk_pctg` = %s, `cli_disk_total` = %s, `cli_disk_used` = %s, `cli_mem_total` = %s, `cli_mem_remaining` = %s, `cli_mem_pctg` = %s, `cli_cpu_cores` = %s, `cli_nic_name` = %s, `cli_nic_addrv4` = %s, `cli_nic_addrv6` = %s, `cli_nic_mac` = %s, `cli_timestamp` = %s where `cli_hostname` = %s"
+            cursor.execute(sql, (dskAvail, dskPercent, dskTot, dskUsed, memTot, memRemain, memPercent, cpuCore, netCard, ipv4Address, ipv6Address, macAddress, timestamp, hostName))
         connection.commit()
         print("Record updated")
     finally:
         connection.close()
 
 def insert():
-    with open('passwd.txt', 'r') as my_file:
+    with open('/usr/local/bin/passwd.txt', 'r') as my_file:
         password = my_file.read().rstrip()
 
     connection = pymysql.connect(host="localhost",
@@ -116,8 +117,8 @@ def insert():
         with connection.cursor() as cursor:
         #Create a new record
 
-            sql = "INSERT INTO `client` (`cli_hostname`, `cli_disk_avil`, `cli_disk_pctg`, `cli_disk_total`, `cli_disk_used`, `cli_mem_total`, `cli_mem_remaining`, `cli_mem_pctg`, `cli_cpu_cores`, `cli_nic_name`, `cli_nic_addrv4`, `cli_nic_addrv6`, `cli_nic_mac`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-            cursor.execute(sql, (hostName, dskAvail, dskPercent, dskTot, dskUsed, memTot, memRemain, memPercent, cpuCore, netCard, ipv4Address, ipv6Address, macAddress))
+            sql = "INSERT INTO `client` (`cli_hostname`, `cli_disk_avil`, `cli_disk_pctg`, `cli_disk_total`, `cli_disk_used`, `cli_mem_total`, `cli_mem_remaining`, `cli_mem_pctg`, `cli_cpu_cores`, `cli_nic_name`, `cli_nic_addrv4`, `cli_nic_addrv6`, `cli_nic_mac`, `cli_timestamp`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+            cursor.execute(sql, (hostName, dskAvail, dskPercent, dskTot, dskUsed, memTot, memRemain, memPercent, cpuCore, netCard, ipv4Address, ipv6Address, macAddress, timestamp))
         connection.commit()
         print("New record inserted")
     finally:
@@ -129,6 +130,8 @@ def main():
     import signal
     import json
     import pymysql
+    global timestamp
+    timestamp = time.strftime("%Y-%m-%dT%H-%M", time.localtime())
     args = create_parser().parse_args()
     if args.method.lower() == 'ssh':
         gatherInfoSSH()
