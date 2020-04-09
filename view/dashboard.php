@@ -70,6 +70,9 @@
                     </ul>
                 </li>
                 <li>
+                    <a href="./logmgmt.php" target="_blank">Manage System Logs</a>
+                </li>
+                <li>
                     <a href="#" data-toggle="modal" data-target="#profileModal">Profile</a>
                 </li>
                 <li>
