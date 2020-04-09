@@ -150,12 +150,12 @@ function getData(url) {
     }
 }
 
-var JSONfiles = ["client-instance-1"];
+var JSONfiles = {files:[{'Client 1':'client-instance-1'}]};
 var clientDTS
 function start() {
-  console.log("This is a for each loop with 1 client and a LOG file and a bar chart")
+  console.log("This is a for each loop with 1 client and a LOG file and a bar charts")
   for (var item in JSONfiles) {
-    console.log(item)
+    console.log(JSONfiles)
     var d = getData(item);
     console.log("I'm inside a loop. Like groundhog day "+d)
     clientDTS = client_data(d);
