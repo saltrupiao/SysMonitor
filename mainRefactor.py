@@ -59,7 +59,6 @@ def gatherInfo(mode):
     global ipv4Address
     global ipv6Address
     global macAddress
-
     
     hostName = str(newList[0])
     memTot = str(newList[1])
@@ -82,7 +81,7 @@ def gatherInfo(mode):
 def update():
     try:
         with connection.cursor() as cursor:
-        #Create a new record
+        #Update record
             sql = "UPDATE `client` set `cli_disk_avil` = %s, `cli_disk_pctg` = %s, `cli_disk_total` = %s, `cli_disk_used` = %s, `cli_mem_total` = %s, `cli_mem_remaining` = %s, `cli_mem_pctg` = %s, `cli_cpu_cores` = %s, `cli_nic_name` = %s, `cli_nic_addrv4` = %s, `cli_nic_addrv6` = %s, `cli_nic_mac` = %s, `cli_timestamp` = %s where `cli_hostname` = %s"
             cursor.execute(sql, (dskAvail, dskPercent, dskTot, dskUsed, memTot, memRemain, memPercent, cpuCore, netCard, ipv4Address, ipv6Address, macAddress, timestamp, hostName))
         connection.commit()
@@ -106,10 +105,11 @@ def printInfo():
         info = str("Hostname: " + hostName +"\nMemory\n------\nMemory Total: " + memTot  + "Gb\nMemory Remai    ning: " + memRemain + "Gb\nMemory Percentage: " + memPercent + "%\n" + "Disk Usage\n----------\nDisk     Total: " + dskTot + "Gb\nDisk Available: " + dskAvail + "Gb\nDisk Used: " + dskUsed + "Gb\nPercentUsed: " + dskPercent + "%\n" + "CPU\n---\nCPU Percentage: " + cpuCore + "%\n" +"Networking Info\n---------------\nInterface: " + netCard + "\nIPv4 address: " + ipv4Address + "\nIPv6 Address: " + ipv6Address + "\nMAC Address: " + macAddress)
 
 def writeLog():
-        destFile = "/opt/bitnami/apache2/htdocs/assets/js/perfData-" + hostName + ".log"
-        my_file = open(destFile, 'w')
-        my_file.writelines(info)
-        my_file.close()
+        destFiles = ["/opt/bitnami/apache2/htdocs/assets/js/perfData-" + hostName + ".log", "/opt/bitnami/apache2/htdocs/logfiles/perfData-" + hostName + ".log"]
+        for destFile in destFiles:
+            my_file = open(destFile, 'w')
+            my_file.writelines(info)
+            my_file.close()
 
 
 def main():
@@ -121,7 +121,7 @@ def main():
     global timestamp
     timestamp = time.strftime("%Y-%m-%dT%H-%M", time.localtime())
 #Example from https://stackoverflow.com/questions/3277503/how-to-read-a-file-line-by-line-into-a-list
-    with open('inventory.txt') as f:
+    with open('/usr/local/bin/inventory.txt') as f:
         hostsLines = f.readlines()
     #hosts = ['34.71.205.185', '35.193.185.213']
     newHost = ""
