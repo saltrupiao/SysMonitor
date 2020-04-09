@@ -51,8 +51,7 @@ def retrieve_performance_data():
     perf_data["disk_free"] = round(disk.free/10**9, 2)
     perf_data["disk_used"] = round(disk.used/10**9, 2)
     perf_data["disk_percent"] = disk.percent
-    perf_data["cpus"] = cpu
-    perf_data["cpu_avg_percent"] = float(str(sum(cpu)/len(cpu))[0:4])
+    perf_data["cpus"] = float(str(sum(cpu)/len(cpu))[0:4])
     perf_data["network_interfaces"] = net_interfaces
     perf_data["network_addresses"] = get_addresses(net)
 
