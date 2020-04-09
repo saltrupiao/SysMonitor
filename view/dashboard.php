@@ -1,3 +1,10 @@
+<?php
+$servername = "35.196.30.1";
+$username = "user";
+$password = "GuoJ1RaadXHf";
+$dbname = "sysmonitor";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,6 +78,9 @@
                 </li>
                 <li>
                     <a href="./logmgmt.php" target="_blank">Manage System Logs</a>
+                </li>
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#pcMgmtModal">Manage Inventory</a>
                 </li>
                 <li>
                     <a href="#" data-toggle="modal" data-target="#profileModal">Profile</a>
@@ -249,7 +259,113 @@
         </div>
         
     </div>
-    
+
+<!-- Manage Computers Modal -->
+<div class="modal fade" id="pcMgmtModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Manage Computer Inventory</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form action="../controller/manageClient.php" method="post">
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label for="input01">PC Name</label>
+                            <?php
+                                //Sourced from: https://www.w3schools.com/php/php_mysql_select.asp
+                                $conn = new mysqli($servername, $username, $password, $dbname);
+                                if ($conn->connect_error) {
+                                    die("Connection failed: " . $conn->connect_error);
+                                }
+
+                                $sql = "SELECT cli_hostname, cli_nic_addrv4 FROM client";
+                                $result = $conn->query($sql);
+                                $i = 1;
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+
+                                        echo "<input type='text' class='form-control' name='name{$i}' value='{$row["cli_hostname"]}' placeholder='Name of PC 1' disabled>";
+                                        $i = $i + 1;
+                                    }
+                                }
+                                else {
+                                    echo "no results";
+                                }
+                                $conn->close();
+                            ?>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="input02">IP Address</label>
+                            <?php
+                            //Sourced from: https://www.w3schools.com/php/php_mysql_select.asp
+                            $conn = new mysqli($servername, $username, $password, $dbname);
+                            if ($conn->connect_error) {
+                                die("Connection failed: " . $conn->connect_error);
+                            }
+
+                            $sql = "SELECT cli_hostname, cli_nic_addrv4 FROM client";
+                            $result = $conn->query($sql);
+                            $i = 1;
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<input type='text' class='form-control' name='ip{$i}' value='{$row["cli_nic_addrv4"]}' placeholder='IP of PC 1'>";
+                                    $i = $i + 1;
+                                }
+                                echo "<input type='text' class='form-control' name='ipn' value='' placeholder='IP of New PC'>";
+                            }
+                            else {
+                                echo "no results";
+                            }
+                            $conn->close();
+                            ?>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="input03">Delete</label><br>
+                            <?php
+
+                            //Sourced from: https://www.w3schools.com/php/php_mysql_select.asp
+                            $conn = new mysqli($servername, $username, $password, $dbname);
+                            if ($conn->connect_error) {
+                                die("Connection failed: " . $conn->connect_error);
+                            }
+
+                            $sql = "SELECT cli_id, cli_hostname FROM client";
+                            $result = $conn->query($sql);
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<input type='hidden' name='cliID' value='{$row["cli_id"]}'>";
+                                    echo "<button type='submit' class='btn btn-danger' name='delBtn' value='{$row["cli_hostname"]}'>Delete</button>";
+                                }
+                            }
+                            else {
+                                echo "no results";
+                            }
+                            $conn->close();
+                            ?>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-actions">
+                        <button type="submit" name="action" value="updateProfile" class="btn btn-primary mt-3">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
     <!-- Profile Modal -->
     <div class="modal fade" id="profileModal">
         <div class="modal-dialog modal-dialog-centered">
