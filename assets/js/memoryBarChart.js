@@ -18,9 +18,11 @@ function client_data(jsonResponse) {
         memory_percent.push(data.memory_percent)
         total_memory.push(data.total_memory)
     }
+    /*
     console.log(available_memory)
     console.log(memory_percent)
     console.log(total_memory)
+    */
 
     var dts = [
         {
