@@ -1,165 +1,95 @@
 var ctx = document.getElementById('coresBarChart');
 
 Chart.defaults.global.defaultFontColor = '#fff';
+var JSONfiles = ["client-instance-1", "client-instance-2"];
+var clientDTS
+var JSONcontents = []
 
-var dts = [
-    {
-        label : "Client 1",
-        data : [3, 6.9, 3, 1, 7.8, 5.1, 4.2, 12.1],
-        backgroundColor : [
-            'rgba(250, 128, 114, 0.5)',  /* Salmon */
-            'rgba(250, 128, 114, 0.5)',
-            'rgba(250, 128, 114, 0.5)',
-            'rgba(250, 128, 114, 0.5)',
-            'rgba(250, 128, 114, 0.5)',
-            'rgba(250, 128, 114, 0.5)',
-            'rgba(250, 128, 114, 0.5)',
-            'rgba(250, 128, 114, 0.5)',
-            'rgba(250, 128, 114, 0.5)'
-        ],
-        borderColor : [
-            'rgba(250, 128, 114, 1)',
-            'rgba(250, 128, 114, 1)',
-            'rgba(250, 128, 114, 1)',
-            'rgba(250, 128, 114, 1)',
-            'rgba(250, 128, 114, 1)',
-            'rgba(250, 128, 114, 1)',
-            'rgba(250, 128, 114, 1)',
-            'rgba(250, 128, 114, 1)',
-            'rgba(250, 128, 114, 1)'
-        ],
-        borderWidth : 1
-    },
-    {
-        label : "Client 2",
-        data : [3, 6.9, 3, 1, 7.8, 5.1, 4.2, 12.1],
-        backgroundColor : [
-            'rgba(205, 92, 92, 0.5)',  /* Indian-red */
-            'rgba(205, 92, 92, 0.5)',
-            'rgba(205, 92, 92, 0.5)',
-            'rgba(205, 92, 92, 0.5)',
-            'rgba(205, 92, 92, 0.5)',
-            'rgba(205, 92, 92, 0.5)',
-            'rgba(205, 92, 92, 0.5)',
-            'rgba(205, 92, 92, 0.5)',
-            'rgba(205, 92, 92, 0.5)'
-        ],
-        borderColor : [
-            'rgba(205, 92, 92, 1)',
-            'rgba(205, 92, 92, 1)',
-            'rgba(205, 92, 92, 1)',
-            'rgba(205, 92, 92, 1)',
-            'rgba(205, 92, 92, 1)',
-            'rgba(205, 92, 92, 1)',
-            'rgba(205, 92, 92, 1)',
-            'rgba(205, 92, 92, 1)',
-            'rgba(205, 92, 92, 1)'
-        ],
-        borderWidth : 1
-    },
-    {
-        label : "Client 3",
-        data : [3, 6.9, 3, 1, 7.8, 5.1, 4.2, 12.1],
-        backgroundColor : [
-            'rgba(178, 34, 34, 0.5)',  /* Firebrick */
-            'rgba(178, 34, 34, 0.5)',
-            'rgba(178, 34, 34, 0.5)',
-            'rgba(178, 34, 34, 0.5)',
-            'rgba(178, 34, 34, 0.5)',
-            'rgba(178, 34, 34, 0.5)',
-            'rgba(178, 34, 34, 0.5)',
-            'rgba(178, 34, 34, 0.5)',
-            'rgba(178, 34, 34, 0.5)'
-        ],
-        borderColor : [
-            'rgba(178, 34, 34, 1)',
-            'rgba(178, 34, 34, 1)',
-            'rgba(178, 34, 34, 1)',
-            'rgba(178, 34, 34, 1)',
-            'rgba(178, 34, 34, 1)',
-            'rgba(178, 34, 34, 1)',
-            'rgba(178, 34, 34, 1)',
-            'rgba(178, 34, 34, 1)',
-            'rgba(178, 34, 34, 1)'
-        ],
-        borderWidth : 1
-    },
-    {
-        label : "Client 4",
-        data : [3, 6.9, 3, 1, 7.8, 5.1, 4.2, 12.1],
-        backgroundColor : [
-            'rgba(255, 0, 0, 0.5)',  /* red */
-            'rgba(255, 0, 0, 0.5)',
-            'rgba(255, 0, 0, 0.5)',
-            'rgba(255, 0, 0, 0.5)',
-            'rgba(255, 0, 0, 0.5)',
-            'rgba(255, 0, 0, 0.5)',
-            'rgba(255, 0, 0, 0.5)',
-            'rgba(255, 0, 0, 0.5)',
-            'rgba(255, 0, 0, 0.5)'
-        ],
-        borderColor : [
-            'rgba(255, 0, 0, 1)',
-            'rgba(255, 0, 0, 1)',
-            'rgba(255, 0, 0, 1)',
-            'rgba(255, 0, 0, 1)',
-            'rgba(255, 0, 0, 1)',
-            'rgba(255, 0, 0, 1)',
-            'rgba(255, 0, 0, 1)',
-            'rgba(255, 0, 0, 1)',
-            'rgba(255, 0, 0, 1)'
-        ],
-        borderWidth : 1
-    },
-        {
-        label : "Client 5",
-        data : [3, 6.9, 3, 1, 7.8, 5.1, 4.2, 12.1],
-        backgroundColor : [
-            'rgba(128, 0, 0, 0.5)',  /* Maroon */
-            'rgba(128, 0, 0, 0.5)',
-            'rgba(128, 0, 0, 0.5)',
-            'rgba(128, 0, 0, 0.5)',
-            'rgba(128, 0, 0, 0.5)',
-            'rgba(128, 0, 0, 0.5)',
-            'rgba(128, 0, 0, 0.5)',
-            'rgba(128, 0, 0, 0.5)',
-            'rgba(128, 0, 0, 0.5)'
-        ],
-        borderColor : [
-            'rgba(128, 0, 0, 1)',
-            'rgba(128, 0, 0, 1)',
-            'rgba(128, 0, 0, 1)',
-            'rgba(128, 0, 0, 1)',
-            'rgba(128, 0, 0, 1)',
-            'rgba(128, 0, 0, 1)',
-            'rgba(128, 0, 0, 1)',
-            'rgba(128, 0, 0, 1)',
-            'rgba(128, 0, 0, 1)'
-        ],
-        borderWidth : 1
+function client_data(jsonResponse) {
+
+    var cpu_usage_percentage = []
+    for (var i = 0; i < jsonResponse.length; i++) {
+        let d = jsonResponse[i];
+        let data = d.system_performance_data
+
+        //cpu_usage_percentage.push(data.cpu_usage_percentage)
     }
-];
 
-var data = {
-    labels: ["Core 0", "Core 1", "Core 2", "Core 3", "Core 4", "Core 5", "Core 6", "Core 7"],
-    datasets: dts
-};
+
+    let dts = [
+        {
+            label: "CPU Usage (%)",
+            data: [10,23],
+            backgroundColor : [
+                'rgba(178, 34, 34, 0.5)',  /* Firebrick */
+                'rgba(178, 34, 34, 0.5)',
+                'rgba(178, 34, 34, 0.5)',
+                'rgba(178, 34, 34, 0.5)',
+                'rgba(178, 34, 34, 0.5)',
+                'rgba(178, 34, 34, 0.5)',
+                'rgba(178, 34, 34, 0.5)',
+                'rgba(178, 34, 34, 0.5)',
+                'rgba(178, 34, 34, 0.5)'
+            ],
+            borderColor : [
+                'rgba(178, 34, 34, 1)',
+                'rgba(178, 34, 34, 1)',
+                'rgba(178, 34, 34, 1)',
+                'rgba(178, 34, 34, 1)',
+                'rgba(178, 34, 34, 1)',
+                'rgba(178, 34, 34, 1)',
+                'rgba(178, 34, 34, 1)',
+                'rgba(178, 34, 34, 1)',
+                'rgba(178, 34, 34, 1)'
+            ],
+            borderWidth : 1
+        }
+    ]
+    return dts
+}
+
+function getData(url) {
+    var file_name = url;
+    var request = new XMLHttpRequest();
+    request.open('GET', "../assets/js/perfData-" + file_name + ".log", false);  // false makes the request synchronous
+    request.send(null);
+
+    if (request.status === 200) {
+        return JSON.parse(request.responseText);
+    }
+}
+
+function start() {
+    for (var i = 0; i < JSONfiles.length; i++) {
+        var d = getData(JSONfiles[i]);
+        console.log(d);
+        JSONcontents.push(d);
+    }
+    clientDTS = client_data(JSONcontents);
+}
+start();
+console.log("complete!");
+var chart_data = {
+    labels: JSONfiles,
+    fontColor: '#fff',
+    datasets: clientDTS
+}
 
 var lineGraph = new Chart(ctx, {
     type: 'bar',
-    data: data,
+    data: chart_data,
     options: {
         scales: {
-            yAxes : [{
-                ticks : {
-                    min : 0,
-                    stacked : false
+            yAxes: [{
+                ticks: {
+                    min: 0,
+                    stacked: false
                 }
             }]
         }
     }
-});
-
+})
+/*
 function addData(chart, label, data) {
     chart.data.labels.push(label);
     chart.data.datasets.forEach((dataset) => {
@@ -175,3 +105,11 @@ function removeData(chart) {
     });
     chart.update();
 }
+
+*/
+
+
+
+
+
+
