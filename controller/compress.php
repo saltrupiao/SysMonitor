@@ -6,21 +6,18 @@
  * Time: 5:26 PM
  */
 
-//$zip = new ZipArchive;
-
 $curDate = date("Y-m-d");
 
 
 $zipFileName = "archive-$curDate.zip";
 
-$zipDir = "/Users/saltrupiano/PhpstormProjects/SysMonitor/compressedFiles/$zipFileName";
-
+$zipDir = "/usr/local/share/sysInfo/$zipFileName";
 
 
 //Sourced From: https://stackoverflow.com/questions/4914750/how-to-zip-a-whole-folder-using-php
 
 // Get real path for our folder
-$rootPath = realpath('/Users/saltrupiano/PhpstormProjects/SysMonitor/testdir12/');
+$rootPath = realpath('/usr/local/share/sysInfo/');
 
 // Initialize archive object
 $zip = new ZipArchive();

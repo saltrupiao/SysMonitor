@@ -13,7 +13,7 @@ session_start();
 
 $fileToDelete = $_GET['getFileName'];
 
-$targetDir = '/Users/saltrupiano/PhpstormProjects/SysMonitor/testdir12/';
+$targetDir = '/usr/local/share/sysInfo/';
 
 $fullPath = $targetDir . $fileToDelete;
 

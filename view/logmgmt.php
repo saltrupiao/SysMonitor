@@ -59,15 +59,15 @@
         </thead>
         <tbody id="logTable">
         <?php
-        $dir = "/Users/saltrupiano/PhpstormProjects/SysMonitor/testdir12/";
+        $dir = "/usr/local/share/sysInfo/";
         $files = scandir($dir);
         foreach ($files as $file) {
             if ($file != "." && $file != "..") {
                 echo "<tr><td>";
                 if (is_dir($file)) {
-                    echo "<b><a href='/phpstorm/SysMonitor/testdir12/$file' target='_blank'>$file</a></b>";
+                    echo "<b><a href='/logs/$file' target='_blank'>$file</a></b>";
                 } else{
-                    echo "<a href='/phpstorm/SysMonitor/testdir12/$file' target='_blank'>$file</a>";
+                    echo "<a href='/logs/$file' target='_blank'>$file</a>";
                 }
                 echo "</td><td>";
                 echo date("F d Y H:i:s", filemtime("$dir$file"));
