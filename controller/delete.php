@@ -13,7 +13,7 @@ session_start();
 
 $fileToDelete = $_GET['getFileName'];
 
-$targetDir = '/usr/local/share/sysInfo/';
+$targetDir = '/opt/bitnami/apache2/htdocs/logfiles/';
 
 $fullPath = $targetDir . $fileToDelete;
 

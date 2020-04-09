@@ -11,13 +11,13 @@ $curDate = date("Y-m-d");
 
 $zipFileName = "archive-$curDate.zip";
 
-$zipDir = "/usr/local/share/sysInfo/$zipFileName";
+$zipDir = "/opt/bitnami/apache2/htdocs/logfiles/$zipFileName";
 
 
 //Sourced From: https://stackoverflow.com/questions/4914750/how-to-zip-a-whole-folder-using-php
 
 // Get real path for our folder
-$rootPath = realpath('/usr/local/share/sysInfo/');
+$rootPath = realpath('/opt/bitnami/apache2/htdocs/logfiles/');
 
 // Initialize archive object
 $zip = new ZipArchive();

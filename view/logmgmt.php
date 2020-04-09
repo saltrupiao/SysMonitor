@@ -59,15 +59,15 @@
         </thead>
         <tbody id="logTable">
         <?php
-        $dir = "/usr/local/share/sysInfo/";
+        $dir = "/opt/bitnami/apache2/htdocs/logfiles/";
         $files = scandir($dir);
         foreach ($files as $file) {
             if ($file != "." && $file != "..") {
                 echo "<tr><td>";
                 if (is_dir($file)) {
-                    echo "<b><a href='/logs/$file' target='_blank'>$file</a></b>";
+                    echo "<b><a href='/logfiles/$file' target='_blank'>$file</a></b>";
                 } else{
-                    echo "<a href='/logs/$file' target='_blank'>$file</a>";
+                    echo "<a href='/logfiles/$file' target='_blank'>$file</a>";
                 }
                 echo "</td><td>";
                 echo date("F d Y H:i:s", filemtime("$dir$file"));
