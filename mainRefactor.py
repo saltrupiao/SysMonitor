@@ -18,10 +18,11 @@ def createConnection():
                                  cursorclass=pymysql.cursors.DictCursor)
 def create_parser():
     parser = ArgumentParser(description="""
-    Used to pull data from clients and insert/update the database
+    Used to pull data from clients. Option to insert/update the database
     """)
     parser.add_argument("--method", default="json", choices=['ssh', 'json'], help="Choose between REST API or SSH")
     parser.add_argument("--firstTime", type=bool, help="If the first time it will insert a record instead of updating one")
+    parser.add_argument("--newHost", help="Provide the IP address for a new client")
 
     return parser
 def testOutput():
@@ -33,6 +34,7 @@ def gatherInfo(mode):
     global info
     if mode == 'ssh':
         print("Using SSH")
+        #for json data use netinfo.py for readable data use grabData.py
         ps = subprocess.Popen(('cat', '/usr/local/bin/grabData.py'), stdout=subprocess.PIPE)
         output = subprocess.check_output(['ssh', 'frozenpizzas4567@34.71.205.185', ' python3 -'], stdin=ps.stdout)
         newList = list(output.split(','))
@@ -73,6 +75,10 @@ def gatherInfo(mode):
     ipv6Address = str(newList[11])
     macAddress = str(newList[12]).rstrip()
 
+    if mode == 'ssh':
+        info = str("Hostname: " + hostName +"\nMemory\n------\nMemory Total: " + memTot  + "Gb\nMemory Remai    ning: " + memRemain + "Gb\nMemory Percentage: " + memPercent + "%\n" + "Disk Usage\n----------\nDisk     Total: " + dskTot + "Gb\nDisk Available: " + dskAvail + "Gb\nDisk Used: " + dskUsed + "Gb\nPercentUsed: " + dskPercent + "%\n" + "CPU\n---\nCPU Percentage: " + cpuCore + "%\n" +"Networking Info\n---------------\nInterface: " + netCard + "\nIPv4 address: " + ipv4Address + "\nIPv6 Address: " + ipv6Address + "\nMAC Address: " + macAddress)
+
+
 def update():
     try:
         with connection.cursor() as cursor:
@@ -98,6 +104,7 @@ def insert():
 
 def printInfo():
         info = str("Hostname: " + hostName +"\nMemory\n------\nMemory Total: " + memTot  + "Gb\nMemory Remai    ning: " + memRemain + "Gb\nMemory Percentage: " + memPercent + "%\n" + "Disk Usage\n----------\nDisk     Total: " + dskTot + "Gb\nDisk Available: " + dskAvail + "Gb\nDisk Used: " + dskUsed + "Gb\nPercentUsed: " + dskPercent + "%\n" + "CPU\n---\nCPU Percentage: " + cpuCore + "%\n" +"Networking Info\n---------------\nInterface: " + netCard + "\nIPv4 address: " + ipv4Address + "\nIPv6 Address: " + ipv6Address + "\nMAC Address: " + macAddress)
+
 def writeLog():
         destFile = "/opt/bitnami/apache2/htdocs/assets/js/perfData-" + hostName + ".log"
         my_file = open(destFile, 'w')
@@ -113,24 +120,33 @@ def main():
     import pymysql
     global timestamp
     timestamp = time.strftime("%Y-%m-%dT%H-%M", time.localtime())
+#Example from https://stackoverflow.com/questions/3277503/how-to-read-a-file-line-by-line-into-a-list
+    with open('inventory.txt') as f:
+        hostsLines = f.readlines()
+    #hosts = ['34.71.205.185', '35.193.185.213']
+    newHost = ""
+    hosts = [x.strip() for x in hostsLines]
     args = create_parser().parse_args()
-    hosts = ['34.71.205.185']
+    if args.newHost==None:
+        pass
+    elif args.newHost in hosts:
+        print("New host is already in inventory")
+    else:
+        newHost = args.newHost
+        hosts.append(newHost)
     i = 0
     for IP in hosts:
         global host
         host = IP
-        #print(host)
-       # testOutput()
         gatherInfo(args.method.lower())
  #       printInfo()
         writeLog()
-    #createConnection()
-    #if args.firstTime:
-    #    insert()
-    #else:
-    #    update()
+        createConnection()
+        if host == newHost:
+            insert()
+            with open("inventory.txt", "a") as f:
+                f.write(host)
+        else:
+            update()
 
 main()
-#gatherInfoSSH()
-#update()
-#insert()
