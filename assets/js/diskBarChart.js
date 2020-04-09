@@ -2,27 +2,37 @@ var ctx = document.getElementById('diskBarChart');
 
 Chart.defaults.global.defaultFontColor = '#fff';
 
-async client_data() {
-  getClientPerfData()
-      .then(data => {
-        console.log(data)
-        let data = data.system_performance_data
+function client_data(jsonResponse) {
+        let d = jsonResponse;
 
-        let disk_free = []
-        data.forEach(c => disk_free.append(c.disk_free))
+        let data = d.system_performance_data
 
-        let disk_usage = []
-        data.forEach(c => disk_usage.append(c.disk_used))
+	var disk_free = []
+	disk_free.push(data.disk_free)
 
-        let disk_total = []
-        data.forEach(c => disk_used.append(c.disk_total))
+	var disk_usage = []
+	disk_usage.push(data.disk_percent)
+
+	var disk_total = []
+	disk_total.push(data.disk_total)
+
+	var disk_used = []
+	disk_used.push(data.disk_used)
+
+	console.log("Testing....")
+	console.log(d)
+	console.log(data)
+	console.log(disk_free)
+	console.log(disk_used)
+	console.log(disk_usage)
+	console.log(disk_total)
 
         let dts = [
           {
-              label : "Disk Free (MB)",
+              label : "Disk Free (GB)",
               data : disk_free,
               backgroundColor : [
-                  'rgba(255, 255, 0, 0.5)',  /* Yellow */
+                  'rgba(255, 255, 0, 0.5)',   /*Yellow*/
                   'rgba(255, 255, 0, 0.5)',
                   'rgba(255, 255, 0, 0.5)',
                   'rgba(255, 255, 0, 0.5)',
@@ -43,7 +53,7 @@ async client_data() {
               label : "Disk Usage (%)",
               data : disk_usage,
               backgroundColor : [
-                  'rgba(204, 204, 0, 0.5)',  /* Dark-yellow1 */
+                  'rgba(204, 204, 0, 0.5)',  /*Dark-yellow1*/
                   'rgba(204, 204, 0, 0.5)',
                   'rgba(204, 204, 0, 0.5)',
                   'rgba(204, 204, 0, 0.5)',
@@ -61,10 +71,10 @@ async client_data() {
               borderWidth : 1
           },
           {
-              label : "Disk Usage (MB)",
-              data : disk_total, // TODO: FIX THIS :)
+              label : "Disk Usage (GB)",
+              data : disk_total,
               backgroundColor : [
-                  'rgba(153, 153, 0, 0.5)',  /* Dark-yellow2 */
+                  'rgba(153, 153, 0, 0.5)',  /* Dark-yellow2*/
                   'rgba(153, 153, 0, 0.5)',
                   'rgba(153, 153, 0, 0.5)',
                   'rgba(153, 153, 0, 0.5)',
@@ -82,10 +92,10 @@ async client_data() {
               borderWidth : 1
           },
           {
-              label : "Disk Used (MB)",
+              label : "Disk Used (GB)",
               data : disk_used,
               backgroundColor : [
-                  'rgba(102, 102, 0, 0.5)',  /* Dark-yellow3 */
+                  'rgba(102, 102, 0, 0.5)',  /* Dark-yellow3*/
                   'rgba(102, 102, 0, 0.5)',
                   'rgba(102, 102, 0, 0.5)',
                   'rgba(102, 102, 0, 0.5)',
@@ -103,33 +113,14 @@ async client_data() {
               borderWidth : 1
           }
         ]
-
+        console.log(dts)
         return dts
-      })
-      .catch(error => {
-        console.error(error)
-      })
 }
 
-const getClientPerfData = async() => {
-  const response = await fetch("http://35.196.30.1:8080/perfdata", {
-      method: 'GET',
-      mode: 'no-cors',
-      cache: 'no-cache',
-      credentials: 'omit',
-      headers: {
-         'Content-Type': 'application/json'
-      },
-      referPolicy: 'no-referer'
-  })
-  const newData = await response.json()
-  return newData
-}
-
-var chart_data = {
-    labels: ["Client 1", "Client 2", "Client 3", "Client 4", "Client 5"],
+/*var chart_data = {
+    labels: ["Client 1"],
     fontColor: '#fff',
-    datasets: await client_data()
+    datasets: client_data()
 }
 
 var lineGraph = new Chart(ctx, {
@@ -145,8 +136,55 @@ var lineGraph = new Chart(ctx, {
             }]
         }
     }
-})
+})*/
 
+function getData(url) {
+    var file_name = url;
+    console.log(file_name)
+    var request = new XMLHttpRequest();
+    request.open('GET', "../assets/js/perfData-"+file_name+".log", false);  // false makes the request synchronous
+    request.send(null);
+
+    if (request.status === 200) {
+        return JSON.parse(request.responseText);
+    }
+}
+
+var JSONfiles = ["client-instance-1"];
+var clientDTS
+function start() {
+  console.log("This is a for each loop with 1 client and a LOG file and a bar chart")
+  for (var item in JSONfiles) {
+    console.log(item)
+    var d = getData(item);
+    console.log("I'm inside a loop. Like groundhog day "+d)
+    clientDTS = client_data(d);
+    console.log(clientDTS)
+  }
+}
+
+/*
+var chart_data = {
+  labels: ["Client-1"],
+  fontColor: '#fff',
+  datasets: clientDTS
+}
+
+var lineGraph = new Chart(ctx, {
+    type: 'bar',
+    data: chart_data,
+    options: {
+        scales: {
+            yAxes : [{
+                ticks : {
+                    min : 0,
+                    stacked : false
+               }
+            }]
+        }
+    }
+})
+*/
 function addData(chart, label, data) {
     chart.data.labels.push(label);
     chart.data.datasets.forEach((dataset) => {
@@ -162,3 +200,5 @@ function removeData(chart) {
     });
     chart.update();
 }
+
+start();
