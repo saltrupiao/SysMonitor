@@ -7,7 +7,9 @@ var JSONcontents = []
 
 function client_data(jsonResponse) {
 
+
     var avg_cpu = []
+
 
     for (var i = 0; i < jsonResponse.length; i++) {
         let d = jsonResponse[i];
@@ -20,7 +22,7 @@ function client_data(jsonResponse) {
     var dts = [
 	{
 	    label : ["Average CPU (%)"],
-	    data : [3, 6.9, 3, 1, 7.8, 5.1, 4.2, 12.1],
+	    data : avg_cpu,
 	    backgroundColor : [
 		'rgba(178, 34, 34, 0.5)',  /* Firebrick */
 		'rgba(178, 34, 34, 0.5)',
@@ -79,10 +81,10 @@ var lineGraph = new Chart(ctx, {
     data: chart_data,
     options: {
         scales: {
-            yAxes : [{
-                ticks : {
-                    min : 0,
-                    stacked : false
+            yAxes: [{
+                ticks: {
+                    min: 0,
+                    stacked: false
                 }
             }]
         }

@@ -209,7 +209,7 @@
                         <div id="netCollapse" class="collapse show" data-parent="#netAccordion">
                             <div class="card-body">
                                 <div class="table-responsive-lg">
-                                    <table class="table table-dark table-striped">
+                                    <table class="table table-dark table-striped" >
                                         <thead>
                                             <tr>
                                                 <th>Interface</th>
@@ -218,25 +218,8 @@
                                                 <th>Mac</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>enp7s0</td>
-                                                <td>192.168.0.12</td>
-                                                <td>26.1:409:8404:1700::9</td>
-                                                <td>26.1:409:8404:1700:52ef:ec99:efdc:f79</td>
-                                            </tr>
-                                            <tr>
-                                                <td>lo</td>
-                                                <td>127.0.0.1</td>
-                                                <td>::1</td>
-                                                <td>00:00:00:00:00:00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>wlp6s0</td>
-                                                <td>46:53:69:13:b4:7d</td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
+                                        <tbody id="networkTable">
+                                            
                                         </tbody>
                                     </table>
                                 </div>
@@ -314,7 +297,7 @@
     <script src="../assets/js/memoryBarChart.js"></script>
     <script src="../assets/js/diskBarChart.js"></script>
     <script src="../assets/js/coresBarChart.js"></script>
-    
+    <script src="../assets/js/networkTable.js"></script>
     <!-- Popper.JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     
