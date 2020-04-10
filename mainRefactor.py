@@ -44,7 +44,7 @@ def gatherInfo(mode):
         info = output
         data = json.loads(output)
         net = data["system_performance_data"]["network_addresses"][list(data["system_performance_data"]["network_addresses"])[0]]
-        newList = (data["system_performance_data"]["host_name"],data["system_performance_data"]["total_memory"],data["system_performance_data"]["available_memory"],data["system_performance_data"]["memory_percent"],data["system_performance_data"]["disk_total"],data["system_performance_data"]["disk_used"],data["system_performance_data"]["disk_free"],data["system_performance_data"]["disk_percent"],data["system_performance_data"]["cpu_avg_percent"],str(list(data["system_performance_data"]["network_addresses"])[0]),net["ipv4"],net["ipv6"],net["mac"])
+        newList = (data["system_performance_data"]["host_name"],data["system_performance_data"]["total_memory"],data["system_performance_data"]["available_memory"],data["system_performance_data"]["memory_percent"],data["system_performance_data"]["disk_total"],data["system_performance_data"]["disk_used"],data["system_performance_data"]["disk_free"],data["system_performance_data"]["disk_percent"],data["system_performance_data"]["cpus"],str(list(data["system_performance_data"]["network_addresses"])[0]),net["ipv4"],net["ipv6"],net["mac"])
 
     global hostName
     global memTot
@@ -105,7 +105,7 @@ def printInfo():
         info = str("Hostname: " + hostName +"\nMemory\n------\nMemory Total: " + memTot  + "Gb\nMemory Remai    ning: " + memRemain + "Gb\nMemory Percentage: " + memPercent + "%\n" + "Disk Usage\n----------\nDisk     Total: " + dskTot + "Gb\nDisk Available: " + dskAvail + "Gb\nDisk Used: " + dskUsed + "Gb\nPercentUsed: " + dskPercent + "%\n" + "CPU\n---\nCPU Percentage: " + cpuCore + "%\n" +"Networking Info\n---------------\nInterface: " + netCard + "\nIPv4 address: " + ipv4Address + "\nIPv6 Address: " + ipv6Address + "\nMAC Address: " + macAddress)
 
 def writeLog():
-        destFiles = ["/opt/bitnami/apache2/htdocs/assets/js/perfData-" + hostName + ".log", "/opt/bitnami/apache2/htdocs/logfiles/perfData-" + hostName + ".log"]
+        destFiles = ["/opt/bitnami/apache2/htdocs/logfiles/perfData-" + hostName + ".log"]
         for destFile in destFiles:
             my_file = open(destFile, 'w')
             my_file.writelines(info)
