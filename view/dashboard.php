@@ -50,7 +50,7 @@ $dbname = "sysmonitor";
         <!-- Sidebar  -->
         <nav id="sidebar" class="bg-dark">
             <div class="sidebar-header text-center">
-                <img src="../assets/img/backgrounds/dashboard.svg" alt="usrImg" style="width: 30%; height: 30%;">
+                <img src="../assets/img/dashboard.svg" alt="usrImg" style="width: 30%; height: 30%;">
                 <h3>System Monitor</h3>
             </div>
 
