@@ -19,7 +19,7 @@ function client_data(jsonResponse) {
 
         disk_percent = (disk_percent + data.disk_percent)
         memory_percent = (memory_percent + data.memory_percent)
-        cpu_avg_percent = (cpu_avg_percent + data.cpu_avg_percent)
+        cpu_avg_percent = (cpu_avg_percent + data.avg_cpu_percent)
         count = (count + 1)
     }
 
@@ -27,12 +27,12 @@ function client_data(jsonResponse) {
     avg_memory_percent = (memory_percent/count)
     avg_cpu_percent = (cpu_avg_percent/count)
 
-    console.log(avg_disk_percent)
+    /*console.log(avg_disk_percent)
     console.log(avg_memory_percent)
     console.log(avg_cpu_percent)
     console.log(disk_percent)
     console.log(memory_percent)
-    console.log(cpu_avg_percent)
+    console.log(cpu_avg_percent)*/
 
     var myPieChart = new Chart(ctxP, {
       type: 'doughnut',

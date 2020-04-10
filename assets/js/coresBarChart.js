@@ -15,7 +15,7 @@ function client_data(jsonResponse) {
         let d = jsonResponse[i];
         let data = d.system_performance_data
 
-        avg_cpu.push(data.avg_cpu)
+        avg_cpu.push(data.avg_cpu_percent)
 
     }
 

@@ -14,7 +14,6 @@ $dbname = "sysmonitor";
 
 if(isset($_POST['ip1'])){
     $ipPC1 = $_POST['ip1'];
-    //echo "IP1 SELECTED!";
 }
 
 if(isset($_POST['ip2'])){
@@ -36,7 +35,7 @@ if(isset($_POST['ip5'])){
 if(isset($_POST['ipn'])){
     $ipPCN = $_POST['ipn'];
 
-    $command = escapeshellcmd('python /Users/saltrupiano/PhpstormProjects/SysMonitor/mainRefactor.py --newHost' . $ipPCN);
+    $command = escapeshellcmd('python /usr/local/bin/mainRefactor.py --newHost' . $ipPCN);
     $output = shell_exec($command);
     echo $output;
 
