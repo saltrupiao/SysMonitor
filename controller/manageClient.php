@@ -43,7 +43,7 @@ if(isset($_POST['ipn'])){
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "INSERT INTO client (cli_hostname, cli_nic_addrv4) VALUES ('10.1.1.1', 'client-instance-4')";
+    $sql = "INSERT INTO client (cli_hostname, cli_nic_addrv4) VALUES ('client-instance-4', '10.1.1.1')";
 
     if ($conn->query($sql) === TRUE) {
         echo "New record created successfully";
