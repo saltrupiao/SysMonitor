@@ -1,0 +1,51 @@
+@media (min-width: 992px) and (max-width: 1199px) {
+	
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+}
+
+@media (max-width: 768px) { /*default: 768px aka lg*/
+
+    #sidebar {
+        margin-left: -250px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+    #content {
+        width: 100%;
+    }
+    #content.active {
+        width: calc(100% - 250px);
+    }
+    #sidebarCollapse span {
+        display: none;
+    }
+	
+}
+
+@media (max-width: 415px) {
+
+}
+
+
+/* Retina-ize images/icons */
+
+@media
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (   min--moz-device-pixel-ratio: 2),
+only screen and (     -o-min-device-pixel-ratio: 2/1),
+only screen and (        min-device-pixel-ratio: 2),
+only screen and (                min-resolution: 192dpi),
+only screen and (                min-resolution: 2dppx) {
+	
+    /* logo */
+/*    .navbar-brand {
+    	background-image: url(../img/logo-light.png) !important;
+        background-repeat: no-repeat !important; 
+        background-size: 123px 34px !important;
+    }*/
+	
+}
