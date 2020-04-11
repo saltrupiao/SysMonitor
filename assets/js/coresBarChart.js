@@ -15,7 +15,7 @@ function client_data(jsonResponse) {
         let d = jsonResponse[i];
         let data = d.system_performance_data
 
-        avg_cpu.push(data.avg_cpu_percent)
+        avg_cpu.push(data.cpus)
 
     }
 
@@ -54,7 +54,7 @@ function client_data(jsonResponse) {
 function getData(url) {
     var file_name = url;
     var request = new XMLHttpRequest();
-    request.open('GET', "../assets/js/perfData-" + file_name + ".log", false);  // false makes the request synchronous
+    request.open('GET', "../../logfiles/perfData-" + file_name + ".log", false);  // false makes the request synchronous
     request.send(null);
 
     if (request.status === 200) {
@@ -69,6 +69,7 @@ function start() {
     }
     clientDTS = client_data(JSONcontents);
 }
+
 start();
 
 var chart_data = {
@@ -90,21 +91,3 @@ var lineGraph = new Chart(ctx, {
         }
     }
 });
-
-/*
-function addData(chart, label, data) {
-    chart.data.labels.push(label);
-    chart.data.datasets.forEach((dataset) => {
-        dataset.data.push(data);
-    });
-    chart.update();
-}
-
-function removeData(chart) {
-    chart.data.labels.pop();
-    chart.data.datasets.forEach((dataset) => {
-        dataset.data.pop();
-    });
-    chart.update();
-}
-*/

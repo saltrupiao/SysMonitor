@@ -1,0 +1,24 @@
+{
+  "system_performance_data": {
+    "available_memory": 0.38, 
+    "cpus": 1.0, 
+    "disk_free": 8.09, 
+    "disk_percent": 18.7, 
+    "disk_total": 10.5, 
+    "disk_used": 1.86, 
+    "host_name": "client-instance-2", 
+    "memory_percent": 39.1, 
+    "network_addresses": {
+      "eth0": {
+        "ipv4": "10.142.0.3", 
+        "ipv6": "fe80::4001:aff:fe8e:3%eth0", 
+        "mac": "42:01:0a:8e:00:03"
+      }
+    }, 
+    "network_interfaces": [
+      "lo", 
+      "eth0"
+    ], 
+    "total_memory": 0.62
+  }
+}
