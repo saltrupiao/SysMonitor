@@ -1,3 +1,6 @@
+document.getElementById("demo").innerHTML = perfdata;
+
+
 var ctx = document.getElementById('diskBarChart');
 
 Chart.defaults.global.defaultFontColor = '#fff';

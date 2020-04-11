@@ -126,6 +126,7 @@
                         <div id="overviewCollapse" class="collapse show" data-parent="#overviewAccordion">
                             <div class="card-body">
                                 <canvas id="doughnutChart" class="mx-auto" style="max-width: 50%; min-width: 45%;"></canvas>
+                                <div id="demo"> </div>
                             </div>
                         </div>
                     </div>
