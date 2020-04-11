@@ -1,15 +1,14 @@
 var ctx = document.getElementById('coresBarChart');
 
 Chart.defaults.global.defaultFontColor = '#fff';
-var JSONfiles = ["client-instance-1", "client-instance-2"];
+
+var JSONfiles = ["client-instance-1","client-instance-2","client-instance-3"];
 var clientDTS
 var JSONcontents = []
 
 function client_data(jsonResponse) {
 
-
     var avg_cpu = []
-
 
     for (var i = 0; i < jsonResponse.length; i++) {
         let d = jsonResponse[i];

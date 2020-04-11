@@ -28,11 +28,7 @@ def create_parser():
 def testOutput():
         output = str(subprocess.check_output(['curl', host + '/perfdata']))
         print(output)
-<<<<<<< .merge_file_CniZLE
-
-=======
     
->>>>>>> .merge_file_Esj28p
 
 def gatherInfo(mode):
     global info
@@ -63,11 +59,7 @@ def gatherInfo(mode):
     global ipv4Address
     global ipv6Address
     global macAddress
-<<<<<<< .merge_file_CniZLE
-
-=======
     
->>>>>>> .merge_file_Esj28p
     hostName = str(newList[0])
     memTot = str(newList[1])
     memRemain = str(newList[2])
@@ -157,8 +149,4 @@ def main():
         else:
             update()
 
-<<<<<<< .merge_file_CniZLE
 main()
-=======
-main()
->>>>>>> .merge_file_Esj28p
