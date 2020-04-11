@@ -1,3 +1,10 @@
+<?php
+$servername = "localhost";
+$username = "user";
+$password = "GuoJ1RaadXHf";
+$dbname = "sysmonitor";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,7 +50,7 @@
         <!-- Sidebar  -->
         <nav id="sidebar" class="bg-dark">
             <div class="sidebar-header text-center">
-                <img src="../assets/img/backgrounds/dashboard.svg" alt="usrImg" style="width: 30%; height: 30%;">
+                <img src="../assets/img/dashboard.svg" alt="usrImg" style="width: 30%; height: 30%;">
                 <h3>System Monitor</h3>
             </div>
 
@@ -68,6 +75,12 @@
                             <a href="#">Client 5</a>
                         </li>
                     </ul>
+                </li>
+		<li>
+		    <a href="logmgmt.php" target="_blank">Manage System Logs</a>
+		</li>
+		<li>
+                    <a href="#" data-toggle="modal" data-target="#pcMgmtModal">Manage Inventory</a>
                 </li>
                 <li>
                     <a href="#" data-toggle="modal" data-target="#profileModal">Profile</a>
@@ -206,7 +219,7 @@
                         <div id="netCollapse" class="collapse show" data-parent="#netAccordion">
                             <div class="card-body">
                                 <div class="table-responsive-lg">
-                                    <table class="table table-dark table-striped">
+                                    <table class="table table-dark table-striped" >
                                         <thead>
                                             <tr>
                                                 <th>Interface</th>
@@ -215,25 +228,8 @@
                                                 <th>Mac</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>enp7s0</td>
-                                                <td>192.168.0.12</td>
-                                                <td>26.1:409:8404:1700::9</td>
-                                                <td>26.1:409:8404:1700:52ef:ec99:efdc:f79</td>
-                                            </tr>
-                                            <tr>
-                                                <td>lo</td>
-                                                <td>127.0.0.1</td>
-                                                <td>::1</td>
-                                                <td>00:00:00:00:00:00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>wlp6s0</td>
-                                                <td>46:53:69:13:b4:7d</td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
+                                        <tbody id="networkTable">
+                                            
                                         </tbody>
                                     </table>
                                 </div>
@@ -246,7 +242,112 @@
         </div>
         
     </div>
-    
+    <!-- Manage Computers Modal -->
+<div class="modal fade" id="pcMgmtModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Manage Computer Inventory</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form action="../controller/manageClient.php" method="post">
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label for="input01">PC Name</label>
+                            <?php
+                                //Sourced from: https://www.w3schools.com/php/php_mysql_select.asp
+                                $conn = new mysqli($servername, $username, $password, $dbname);
+                                if ($conn->connect_error) {
+                                    die("Connection failed: " . $conn->connect_error);
+                                }
+
+                                $sql = "SELECT cli_hostname, cli_nic_addrv4 FROM client";
+                                $result = $conn->query($sql);
+                                $i = 1;
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+
+                                        echo "<input type='text' class='form-control' name='name{$i}' value='{$row["cli_hostname"]}' placeholder='Name of PC 1' disabled>";
+                                        $i = $i + 1;
+                                    }
+                                }
+                                else {
+                                    echo "no results";
+                                }
+                                $conn->close();
+                            ?>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="input02">IP Address</label>
+                            <?php
+                            //Sourced from: https://www.w3schools.com/php/php_mysql_select.asp
+                            $conn = new mysqli($servername, $username, $password, $dbname);
+                            if ($conn->connect_error) {
+                                die("Connection failed: " . $conn->connect_error);
+                            }
+
+                            $sql = "SELECT cli_hostname, cli_nic_addrv4 FROM client";
+                            $result = $conn->query($sql);
+                            $i = 1;
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<input type='text' class='form-control' name='ip{$i}' value='{$row["cli_nic_addrv4"]}' placeholder='IP of PC 1'>";
+                                    $i = $i + 1;
+                                }
+                                echo "<input type='text' class='form-control' name='ipn' value='' placeholder='IP of New PC'>";
+                            }
+                            else {
+                                echo "no results";
+                            }
+                            $conn->close();
+                            ?>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="input03">Delete</label><br>
+                            <?php
+
+                            //Sourced from: https://www.w3schools.com/php/php_mysql_select.asp
+                            $conn = new mysqli($servername, $username, $password, $dbname);
+                            if ($conn->connect_error) {
+                                die("Connection failed: " . $conn->connect_error);
+                            }
+
+                            $sql = "SELECT cli_id, cli_hostname FROM client";
+                            $result = $conn->query($sql);
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<input type='hidden' name='cliID' value='{$row["cli_id"]}'>";
+                                    echo "<button type='submit' class='btn btn-danger' name='delBtn' value='{$row["cli_hostname"]}'>Delete</button>";
+                                }
+                            }
+                            else {
+                                echo "no results";
+                            }
+                            $conn->close();
+                            ?>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-actions">
+                        <button type="submit" name="action" value="updateProfile" class="btn btn-primary mt-3">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
     <!-- Profile Modal -->
     <div class="modal fade" id="profileModal">
         <div class="modal-dialog modal-dialog-centered">
@@ -311,7 +412,7 @@
     <script src="../assets/js/memoryBarChart.js"></script>
     <script src="../assets/js/diskBarChart.js"></script>
     <script src="../assets/js/coresBarChart.js"></script>
-    
+    <script src="../assets/js/networkTable.js"></script>
     <!-- Popper.JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     
