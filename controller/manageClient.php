@@ -35,9 +35,22 @@ if(isset($_POST['ip5'])){
 if(isset($_POST['ipn'])){
     $ipPCN = $_POST['ipn'];
 
-    $command = escapeshellcmd('python /usr/local/bin/mainRefactor.py --newHost' . $ipPCN);
-    $output = shell_exec($command);
-    echo $output;
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "INSERT INTO client (cli_hostname, cli_nic_addrv4) VALUES ($ipPCN, 'client-instance-4')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "New record created successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    $conn->close();
 
 }
 
