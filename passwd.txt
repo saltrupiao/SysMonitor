@@ -1,5 +1,1 @@
-<<<<<<< .merge_file_txSPod
-GuoJ1RaadXHf
-=======
 <enter database password here>
->>>>>>> .merge_file_rG6Bmt
