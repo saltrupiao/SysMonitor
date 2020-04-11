@@ -31,7 +31,7 @@
             <div class="col-12 my-auto">
                 <div class="d-flex justify-content-center align-items-center">
                     <div class="card wow fadeIn">
-                        <form action="view/dashboard.php" class="was-validated" method="post" id="login-container">
+                        <form action="controller/login.php" class="was-validated" method="post" id="login-container">
                             <div class="card-header text-center">
                                 <img src="assets/img/dashboard.svg" alt="usrImg" style="width: 30%; height: 30%;">
                                 <h2 class="pt-2">System Monitor</h2>

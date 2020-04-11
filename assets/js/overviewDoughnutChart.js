@@ -1,13 +1,12 @@
 var ctxP = document.getElementById("doughnutChart").getContext('2d');
-
-var JSONfiles = ["client-instance-1", "client-instance-2"];
+var JSONfiles = ["client-instance-1","client-instance-2","client-instance-3"];
 var JSONcontents = []
 
 function client_data(jsonResponse) {
 
     var disk_percent = 0.0
     var memory_percent = 0.0
-    var cpu_avg_percent = 0.0
+    var cpus = 0.0
     var avg_disk_percent = 0.0
     var avg_memory_percent = 0.0
     var avg_cpu_percent = 0.0
@@ -19,20 +18,13 @@ function client_data(jsonResponse) {
 
         disk_percent = (disk_percent + data.disk_percent)
         memory_percent = (memory_percent + data.memory_percent)
-        cpu_avg_percent = (cpu_avg_percent + data.avg_cpu_percent)
+        cpus = (cpus + data.cpus)
         count = (count + 1)
     }
 
     avg_disk_percent = (disk_percent/count)
     avg_memory_percent = (memory_percent/count)
-    avg_cpu_percent = (cpu_avg_percent/count)
-
-    /*console.log(avg_disk_percent)
-    console.log(avg_memory_percent)
-    console.log(avg_cpu_percent)
-    console.log(disk_percent)
-    console.log(memory_percent)
-    console.log(cpu_avg_percent)*/
+    avg_cpu_percent = (cpus/count)
 
     var myPieChart = new Chart(ctxP, {
       type: 'doughnut',
@@ -68,7 +60,7 @@ function client_data(jsonResponse) {
 function getData(url) {
     var file_name = url;
     var request = new XMLHttpRequest();
-    request.open('GET', "../assets/js/perfData-" + file_name + ".log", false);  // false makes th$
+    request.open('GET', "../../logfiles/perfData-" + file_name + ".log", false);  // false makes th$
     request.send(null);
 
     if (request.status === 200) {
@@ -78,7 +70,6 @@ function getData(url) {
 
 function start() {
     for (var i = 0; i < JSONfiles.length; i++) {
-        console.log("Loop Started....")
         var d = getData(JSONfiles[i]);
         JSONcontents.push(d);
     }
