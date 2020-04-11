@@ -11,7 +11,7 @@ $username = "user";
 $password = "GuoJ1RaadXHf";
 $dbname = "sysmonitor";
 
-
+/*
 if(isset($_POST['ip1'])){
     $ipPC1 = $_POST['ip1'];
 }
@@ -31,6 +31,7 @@ if(isset($_POST['ip4'])){
 if(isset($_POST['ip5'])){
     $ipPC5 = $_POST['ip5'];
 }
+*/
 
 if(isset($_POST['ipn'])){
     $ipPCN = $_POST['ipn'];
@@ -42,7 +43,7 @@ if(isset($_POST['ipn'])){
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "INSERT INTO client (cli_hostname, cli_nic_addrv4) VALUES ($ipPCN, 'client-instance-4')";
+    $sql = "INSERT INTO client (cli_hostname, cli_nic_addrv4) VALUES ('10.1.1.1', 'client-instance-4')";
 
     if ($conn->query($sql) === TRUE) {
         echo "New record created successfully";
