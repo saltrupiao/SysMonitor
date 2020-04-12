@@ -1,7 +1,7 @@
 ## SysMonitor
 
 ## Central Server Configuration
-# How to configure:
+#How to configure:
   1) Edit the passwd.txt file to include your database password. 
   2) Edit inventory.txt to point to your client's external IP addresses.
   3) Configure your DSN in the login.php file.
