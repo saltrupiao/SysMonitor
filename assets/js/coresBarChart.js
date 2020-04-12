@@ -1,3 +1,5 @@
+//Chart created using ChartJS
+
 var ctx = document.getElementById('coresBarChart');
 
 Chart.defaults.global.defaultFontColor = '#fff';
