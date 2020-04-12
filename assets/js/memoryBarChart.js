@@ -1,3 +1,5 @@
+//Used ChartJS to create graphs
+
 var ctx = document.getElementById('memoryBarChart');
 
 Chart.defaults.global.defaultFontColor = '#fff';
