@@ -1,3 +1,5 @@
+//chart created using https://mdbootstrap.com/docs/jquery/javascript/charts/#doughnut-chart
+
 var ctxP = document.getElementById("doughnutChart").getContext('2d');
 var JSONfiles = ["client-instance-1","client-instance-2","client-instance-3"];
 var JSONcontents = []
